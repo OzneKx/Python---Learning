@@ -43,5 +43,5 @@ elif escolhaComputador == 2: #JOGADOR JOGOU TESOURA
         print('Você \033[31mPERDEU!\033[m')
     elif suaEscolhaAgora == 2:
         print('\033[36mEMPATE!\033[m')
-     elif suaEscolhaAgora > 2:
-         print('\033[31mJOGADA INVÁLIDA!\033[m')
+    elif suaEscolhaAgora > 2:
+        print('\033[31mJOGADA INVÁLIDA!\033[m')
