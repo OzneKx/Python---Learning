@@ -21,13 +21,12 @@ CONST_FIELD_AGE = "age"
 def get_int_value_with_range(message, min_value, max_value):
     while True:
         try:
-            escolha = int(input(message + ": "))
+            escolha = int(input(f'{message}: '))
         except ValueError:
             print("Formato inválido: esperado um número")
             continue
         if not min_value <= escolha <= max_value:
-            print("Opção inválida: escolha um número de",
-                  min_value, "a", max_value)
+            print(f'Opção inválida: escolha um número de {min_value} a {max_value}')
         else:
             return escolha
 
@@ -53,10 +52,10 @@ def client_edit():
 
 
 # Cadastra clientes
-def client_add(clients):
-    id = input("Por favor, digite o CPF do cliente: ")
-    name = input("Por favor, digite o nome do cliente: ")
-    city = input("Por favor, digite a cidade do cliente: ")
+def client_register(clients):
+    id = input('Informe o CPF do cliente: ')
+    name = input('Informe o nome do cliente: ')
+    city = input('Informe a cidade do cliente: ')
     age = get_int_value_with_range("Digite a idade do cliente", 18, 120)
     if id in clients:
         return False
@@ -88,7 +87,7 @@ def main():
     while True:
         escolha = menu()
         if escolha == 1:
-            if client_add(clients):
+            if client_register(clients):
                 "Cliente cadastrado com sucesso"
             else:
                 "Problemas no cadastro do cliente"
