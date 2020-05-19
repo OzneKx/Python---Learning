@@ -21,15 +21,15 @@ CONST_FIELD_AGE = "age"
 def get_int_value_with_range(message, min_value, max_value):
     while True:
         try:
-            op = int(input(message + ": "))
+            escolha = int(input(message + ": "))
         except ValueError:
             print("Formato inválido: esperado um número")
             continue
-        if not min_value <= op <= max_value:
+        if not min_value <= escolha <= max_value:
             print("Opção inválida: escolha um número de",
                   min_value, "a", max_value)
         else:
-            return op
+            return escolha
 
             
 # Apaga o banco de dados
@@ -71,14 +71,14 @@ def client_add(clients):
 
 # Exibe o menu de opções
 def menu():
-    print("*** Sistema de Cadastro de Clientes ***")
-    print("1. Cadastrar cliente")
-    print("2. Alterar dados de cliente")
-    print("3. Excluir cliente")
-    print("4. Pesquisar cliente")
-    print("5. Zerar banco de dados")
-    print("6. Sair")
-    print("***************************************\n")
+    print("=-= Sistema de Cadastro de Clientes =-=")
+    print('[1] Cadastrar Cliente\n'
+          '[2] Alterar dados de cliente\n'
+          '[3] Excluir cliente\n'
+          '[4] Pesquisar Cliente\n'
+          '[5] Zerar Banco de Dados\n'
+          '[6] SAIR')
+    print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n")
     return get_int_value_with_range("Digite uma das opções", 1, 6)
 
 
@@ -86,21 +86,20 @@ def menu():
 def main():
     clients = {}  # banco de dados no formato dicionário
     while True:
-        op = menu()
-        if op == 1:
+        escolha = menu()
+        if escolha == 1:
             if client_add(clients):
                 "Cliente cadastrado com sucesso"
             else:
                 "Problemas no cadastro do cliente"
-        elif op == 2:
+        elif escolha == 2:
             pass
-        elif op == 3:
-            pass
-        elif op == 4:
-            pass
-        elif op == 5:
-            pass
-        elif op == 6:
+        elif escolha == 3: pass
+        elif escolha == 3: pass
+        elif escolha == 4: pass
+        elif escolha == 5: pass
+        elif escolha == 6: 
+            print('Volte sempre! ')
             break
 
 
