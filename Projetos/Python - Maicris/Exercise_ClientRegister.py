@@ -80,7 +80,7 @@ def client_edit(clients):
 
 #Remove clientes
 def client_del(clients):
-    cpf = input('Informe o cpf do cliente que deseja remover: ')        #Remoção do cliente através do CPF
+    cpf = input('Informe o cpf do cliente que deseja remover: ')         #Remoção do cliente através do CPF
     if cpf == id:
         for v in clients.values():
             clients.pop(v)
