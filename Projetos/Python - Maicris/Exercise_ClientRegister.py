@@ -135,7 +135,7 @@ def main():
             else:
                 'Problemas ao deletar o banco de dados! '
         elif escolha == 6: 
-            print('Volte sempre! ')                             #Saída do programa com mensagem de agradecimento
+            print('Volte sempre! ')                             #Saída do programa com mensagem de agradecimento ao usuário
             break
 
 
