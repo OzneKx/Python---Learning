@@ -93,6 +93,7 @@ def client_query(clients):
         clients[buscar]
     print(clients[buscar])
 
+
 #Exclui o banco de dados
 def database_clear(clients):
     really = int(input('Certeza de que gostaria de deletar o banco de dados?\n' #Confirmar se deseja mesmo deletar o banco de dados
