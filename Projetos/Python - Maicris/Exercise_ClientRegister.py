@@ -12,6 +12,11 @@ clients {
 }
 """
 
+#
+def sleep():
+    from time import sleep   #Importando sleep do time
+    sleep(1)
+
 
 #Keys do dicionário
 CONST_FIELD_NAME = "name"
@@ -30,7 +35,7 @@ def menu():
           '[6] SAIR')
     print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n")
     return get_int_value_with_range("Digite uma das opções", 1, 6)
-
+    
 
 #Validando dados inteiros em um determinado range
 def get_int_value_with_range(message, min_value, max_value):
@@ -66,24 +71,24 @@ def client_register(clients):
 
 #Edita os dados de clientes
 def client_edit(clients):
-    editar = int(input('[1] Nome\n'
-                       '[2] Cidade\n'
-                       '[3] Idade\n'
-                       'Faça sua escolha: '))
-    if editar == 1: 
-        clients['name'] = input('Nome substituto: ')
-    elif editar == 2:
-        clients['city'] = input('Cidade substituta: ')
-    else:
-        clients['age'] = input('Idade substituta: ')
-
+    editar = input('Informe o cpf do cliente a ser editado: ')
+    if editar in clients:
+        new_data = input('Deseja mesmo alterar? [S/N]: ').upper()
+        if new_data == 'S':
+            clients.pop(editar)
+            client_register(clients)
+        elif new_data == 'N':
+            print('Não houveram aterações de dados do cliente... ')
+     
 
 #Remove clientes
 def client_del(clients):
-    cpf = input('Informe o cpf do cliente que deseja remover: ')         #Remoção do cliente através do CPF
-    if cpf == id:
-        for v in clients.values():
-            clients.pop(v)
+    remover = input('Informe o cpf do cliente que deseja remover: ')      #Remoção do cliente através do CPF
+    if remover == clients:
+        clients.pop(remover)
+        print('Cliente removido com sucesso! ')
+    else:
+        print('Cliente não encontrado. Não foi possível removê-lo... ')
 
 
 #Pesquisa clientes
@@ -91,19 +96,23 @@ def client_query(clients):
     buscar = input('Informe o cpf do cliente que deseja pesquisar: ')     #Pesquisa do cliente através do CPF
     if buscar in clients:
         clients[buscar]
-    print(clients[buscar])
+        print('Cliente encontrado: ')
+        print(clients[buscar])
+    else:
+        print('Não foi possível encontrar o cliente... ')
 
 
 #Exclui o banco de dados
 def database_clear(clients):
-    really = int(input('Certeza de que gostaria de deletar o banco de dados\n'    #Confirmar se deseja mesmo deletar o banco de dados
-                       '[1] SIM\n'
-                       '[2] NÃO\n'
-                       'Escolha: '))
-    if really == 1:
+    really = input('Certeza de que gostaria de deletar o banco de dados\n'    #Confirmar se deseja mesmo deletar o banco de dados
+                       '[S] SIM\n'
+                       '[N] NÃO\n'
+                       'Escolha: ').upper()
+    if really == 'S':
         clients.clear()
-    else:
-        print('O banco de dados não foi deletado! ')
+        print('Banco de dados deletado com sucesso! ')
+    elif really == 'N':
+        print('O banco de dados não foi deletado... ')
 
 
 #Ponto de entrada do módulo
@@ -112,28 +121,15 @@ def main():
     while True:
         escolha = menu()
         if escolha == 1:
-            if client_register(clients):
-                print('Cliente cadastrado com sucesso! ')
-            else:
-                print('Problemas no cadastro do cliente! ')
+            client_register(clients)
         elif escolha == 2:
-            if client_edit(clients):
-                print('Dados alterados com sucesso! ')
-            else:
-                print('Problemas na alteração de dados do cliente! ')
+            client_edit(clients)
         elif escolha == 3:
-            if client_del(clients):
-                print('Cliente exluido com sucesso ')
-            else:
-                print('Problemas na exclusão do cliente! ')
+            client_del(clients)
         elif escolha == 4:
-            if client_query(clients):
-                print('Cliente encontrado com sucesso! ')
+            client_query(clients)
         elif escolha == 5:
-            if database_clear(clients):
-                print('Banco de dados limpo com sucesso! ')
-            else:
-                print('Problemas ao deletar o banco de dados! ')
+            database_clear(clients)
         elif escolha == 6: 
             print('Volte sempre! ')                              #Saída do programa com mensagem de agradecimento ao usuário
             break
