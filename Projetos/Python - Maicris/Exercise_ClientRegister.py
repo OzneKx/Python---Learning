@@ -88,7 +88,7 @@ def client_del(clients):
 
 #Pesquisa clientes
 def client_query(clients):
-    buscar = input('Informe o cpf do cliente que deseja pesquisar: ')    #Pesquisa do cliente através do CPF
+    buscar = input('Informe o cpf do cliente que deseja pesquisar: ')     #Pesquisa do cliente através do CPF
     if buscar in clients:
         clients[buscar]
     print(clients[buscar])
