@@ -96,7 +96,7 @@ def client_query(clients):
 
 #Exclui o banco de dados
 def database_clear(clients):
-    really = int(input('Certeza de que gostaria de deletar o banco de dados?\n'    #Confirmar se deseja mesmo deletar o banco de dados
+    really = int(input('Certeza de que gostaria de deletar o banco de dados\n'    #Confirmar se deseja mesmo deletar o banco de dados
                        '[1] SIM\n'
                        '[2] NÃO\n'
                        'Escolha: '))
@@ -108,7 +108,7 @@ def database_clear(clients):
 
 #Ponto de entrada do módulo
 def main():
-    clients = {}                                    #Banco de dados no formato dicionário
+    clients = {}                                     #Banco de dados no formato dicionário
     while True:
         escolha = menu()
         if escolha == 1:
