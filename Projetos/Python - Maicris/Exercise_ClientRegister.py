@@ -113,27 +113,27 @@ def main():
         escolha = menu()
         if escolha == 1:
             if client_register(clients):
-                'Cliente cadastrado com sucesso! '
+                print('Cliente cadastrado com sucesso! ')
             else:
-                'Problemas no cadastro do cliente! '
+                print('Problemas no cadastro do cliente! ')
         elif escolha == 2:
             if client_edit(clients):
-                'Dados alterados com sucesso!'
+                print('Dados alterados com sucesso! ')
             else:
-                'Problemas na alteração de dados do cliente! '
+                print('Problemas na alteração de dados do cliente! ')
         elif escolha == 3:
             if client_del(clients):
-                'Cliente exluido com sucesso'
+                print('Cliente exluido com sucesso ')
             else:
-                'Problemas na exclusão do cliente! '
+                print('Problemas na exclusão do cliente! ')
         elif escolha == 4:
             if client_query(clients):
                 print('Cliente encontrado com sucesso! ')
         elif escolha == 5:
             if database_clear(clients):
-                'Banco de dados limpo com sucesso! '
+                print('Banco de dados limpo com sucesso! ')
             else:
-                'Problemas ao deletar o banco de dados! '
+                print('Problemas ao deletar o banco de dados! ')
         elif escolha == 6: 
             print('Volte sempre! ')                              #Saída do programa com mensagem de agradecimento ao usuário
             break
