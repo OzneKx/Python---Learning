@@ -3,11 +3,12 @@ Exemplo de uso de funções para cadastro
 Uso de Dicionários como banco de dados
 Estrutura:
 
+#Dados de cadastro do cliente
 clients {
     id : {
-        name: ,
-        city: ,
-        age:
+        name: nome do usuário,
+        city: cidade do usuário ,
+        age:  idade do usuário
     }
 }
 """
@@ -32,7 +33,7 @@ def menu():
     print('\033[31m=-=\033[m' * 10)
     print(f'\033[33m{"CADASTRAR CLIENTES":^30}\033[m')
     print('\033[31m=-=\033[m' * 10)
-    print('---------SUAS OPÇÕES----------')
+    print('---------SUAS OPÇÕES----------')                             #Exibição do menu
     print('\033[34m[1] Cadastrar Cliente\n'
           '[2] Alterar dados de cliente\n'
           '[3] Excluir cliente\n'
@@ -40,7 +41,7 @@ def menu():
           '[5] Zerar Banco de Dados\n'
           '[6] SAIR\033[m')
     print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n")
-    return get_int_value_with_range("Digite uma das opções: ", 1, 6)
+    return get_int_value_with_range("Digite uma das opções: ", 1, 6)     #Solicitar ao usuário digitar corretamente as opções disponíveis
 
 
 #Validando dados inteiros em um determinado range
@@ -49,16 +50,16 @@ def get_int_value_with_range(message, min_value, max_value):
         try:
             escolha = int(input(f'{message}: '))
         except ValueError:
-            print("\033[31mFormato inválido: esperado um número\033[m")
+            print("\033[31mFormato inválido: esperado um número\033[m")     #Mensagem de formato inválido quando uma letra for inserida no lugar de um número
             continue
         if not min_value <= escolha <= max_value:
-            print(f'\033[31mOpção inválida: escolha um número de {min_value} a {max_value}\033[m')
+            print(f'\033[31mOpção inválida: escolha um número de {min_value} a {max_value}\033[m')  #Mensagem de formato inválido quando um número fora das opções forem inseridos
         else:
             return escolha
 
 
 #Cadastro de clientes
-def client_register(clients):
+def client_register(clients):                           #Solicitar ao usuário dados básicos para o cadastro
     id = input('Informe a identidade do cliente: ')
     name = input('Informe o nome do cliente: ')
     city = input('Informe a cidade do cliente: ')
@@ -136,15 +137,15 @@ def main():
     while True:
         escolha = menu()
         if escolha == 1:
-            client_register(clients)
+            client_register(clients)                                            #Chamar a função
         elif escolha == 2:
-            client_edit(clients)
+            client_edit(clients)                                                #Chamar a função
         elif escolha == 3:
-            client_del(clients)
+            client_del(clients)                                                 #Chamar a função
         elif escolha == 4:
-            client_query(clients)
+            client_query(clients)                                               #Chamar a função
         elif escolha == 5:
-            database_clear(clients)
+            database_clear(clients)                                             #Chamar a função
         elif escolha == 6:
             sleep() 
             print('\033[33mVolte sempre! \033[m ')                              #Saída do programa com mensagem de agradecimento ao usuário
