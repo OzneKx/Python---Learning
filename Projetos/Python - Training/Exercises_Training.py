@@ -18,7 +18,7 @@ from random import randint
 for c in range(1, 4 + 1, 1):
   dict_dice[c] = randint(1, 7)
   print(f'O jogador {c} tirou {dict_dice[c]}')
-print('-------RANKING FINAL------')
+print('-------RANKING FINAL-------')
 maior = 0
 for k, v in sorted(dict_dice.items(), key=itemgetter(1), reverse=True):
   maior += 1
