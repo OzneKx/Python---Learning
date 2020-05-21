@@ -6,7 +6,7 @@ if media <= 5:
   dict_alunos["Situação"] = 'Reprovado'
 elif 5 < media < 7:
   dict_alunos["Situação"] = 'Recuperação'
-else:
+elif media >= 7:
   dict_alunos["Situação"] = 'Aprovado'
 for k, v in dict_alunos.items():
   print(f'{k} = {v}')
