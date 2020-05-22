@@ -12,6 +12,7 @@ for k, v in dict_alunos.items():
   print(f'{k} = {v}')'''
 
 
+
 '''from operator import itemgetter
 dict_dice = {}
 from random import randint
