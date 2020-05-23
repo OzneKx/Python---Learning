@@ -49,8 +49,8 @@ for c in range(1, dict_fut["Partidas"] + 1):
 dict_fut["Total"] = sum(dict_fut["Gols"]) 
 print('=-=' * 20)
 print(f'O jogador {dict_fut["Nome"]} jogou {dict_fut["Partidas"]} partidas. ') 
-for c in range(1, dict_fut["Partidas"] + 1):
-  print(f'Na {c}ª partida, {dict_fut["Gols"][c]} gols.')
+for x in range(1, dict_fut["Partidas"] + 1):
+  print(f'Na {x}ª partida, {dict_fut["Gols"][x]} gols.')
 print(f'O total de gols, entretanto, foi de: {dict_fut["Total"]}')
 
 
