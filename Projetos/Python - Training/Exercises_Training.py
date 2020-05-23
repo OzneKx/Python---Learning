@@ -42,3 +42,4 @@ for k in dict_cadastro.keys():
     print(f'Ainda faltam {((ano_atual - dict_cadastro["Ano de Contratação"]) +  dict_cadastro["Idade"])} anos para se aposentar. ')
 for k, v in dict_cadastro.items():
   print(f'{k} tem valor igual a = {v}')
+
