@@ -50,7 +50,7 @@ dict_fut["Total"] = sum(dict_fut["Gols"])
 print('=-=' * 20)
 print(f'O jogador {dict_fut["Nome"]} jogou {dict_fut["Partidas"]} partidas. ') 
 for c in range(1, dict_fut["Partidas"] + 1):
-  print(f'Na {c}ª partida, {di'
+  print(f'Na {c}ª partida, {dic'
 
 
 
