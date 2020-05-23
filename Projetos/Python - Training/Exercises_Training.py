@@ -33,7 +33,7 @@ dict_cadastro = {"Nome": 0 ,
                  }
 for k in dict_cadastro.keys():
   dict_cadastro[k] = input(f'Digite seu {k}: ')
-  nascimento = int(input('Ano de nascimento: '))
+  nascimento = int(input('Ano de nasciment: '))
   dict_cadastro["Idade"] = (ano_atual - nascimento)
   dict_cadastro["Anos restantes de Trabalho"] = ((ano_atual - dict_cadastro["Ano de Contratação"]) +  dict_cadastro["Idade"])
   if dict_cadastro["Anos restantes de Trabalho"] > 35:
