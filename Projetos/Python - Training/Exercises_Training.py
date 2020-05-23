@@ -39,9 +39,22 @@ if dict_cadastro["CTPS"] != 0:
 for k, v in dict_cadastro.items():
   print(f'{k} tem valor igual a = {v}')'''
 
-
-dict_fut = {"Partidas Jogadas": 0, "Gols na Partida": 0}
+    
+dict_fut = {}
 dict_fut["Nome"] = str(input('Nome do jogador: '))
+dict_fut["Partidas"] = int(input('Total de partidas jogadas por ele: '))
+dict_fut["Gols"] = []
+for c in range(1, dict_fut["Partidas"] + 1):
+  dict_fut["Gols"].append(int(input(f'Números de gols na {c}ª partida: ')))
+dict_fut["Total"] = sum(dict_fut["Gols"]) 
+print('=-=' * 20)
+print(f'O jogador {dict_fut["Nome"]} jogou {dict_fut["Partidas"]} partidas. ') 
+for c in range(1, dict_fut["Partidas"] + 1):
+  print(f'Na {c}ª partida, '
+
+
+
+
 
 for k, v in dict_fut.items():
   print(f'{k} tem valor igual a = {v}')
