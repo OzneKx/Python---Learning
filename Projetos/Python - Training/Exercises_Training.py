@@ -25,21 +25,23 @@ for k, v in sorted(dict_dice.items(), key=itemgetter(1), reverse=True):
   print(f'{k} ficou em {maior}° lugar, com: {v} pontos. ')'''
 
 
-from datetime import date
+'''from datetime import date
+dict_cadastro = {}
 ano_atual = date.today().year
-dict_cadastro = {"Nome": 0 ,
-                 "Carteira de Trabalho": 0, 
-                 "Ano de Contratação": 0, "Salário": 0
-                 }
-for k in dict_cadastro.keys():
-  dict_cadastro[k] = input(f'Digite seu {k}: ')
-  nascimento = int(input('Ano de nascimento: '))
-  dict_cadastro["Idade"] = (ano_atual - nascimento)
-  dict_cadastro["Anos restantes de Trabalho"] = ((ano_atual - dict_cadastro["Ano de Contratação"]) +  dict_cadastro["Idade"])
-  if dict_cadastro["Anos restantes de Trabalho"] > 35:
-    print(f'Você já está aposentado! ')
-  else:
-    print(f'Ainda faltam {((ano_atual - dict_cadastro["Ano de Contratação"]) +  dict_cadastro["Idade"])} anos para se aposentar. ')
+dict_cadastro["Nome"] = str(input('Digite seu nome: '))
+nascimento = int(input('Ano de nascimento: '))
+dict_cadastro["Idade"] = (ano_atual - nascimento)
+dict_cadastro["CTPS"] = int(input('Carteira de trabalho (0 NÃO TEM): '))
+if dict_cadastro["CTPS"] != 0:
+  dict_cadastro["Ano de Contratação"] = int(input('Ano de contratação: '))
+  dict_cadastro["Salário"] = float(input('Salário: R$'))
+  dict_cadastro["Aposentadoria"] = ((dict_cadastro["Ano de Contratação"] + 35) +  dict_cadastro["Idade"] - ano_atual)
 for k, v in dict_cadastro.items():
-  print(f'{k} tem valor igual a = {v}')
+  print(f'{k} tem valor igual a = {v}')'''
 
+
+dict_fut = {"Partidas Jogadas": 0, "Gols na Partida": 0}
+dict_fut["Nome"] = str(input('Nome do jogador: '))
+
+for k, v in dict_fut.items():
+  print(f'{k} tem valor igual a = {v}')
