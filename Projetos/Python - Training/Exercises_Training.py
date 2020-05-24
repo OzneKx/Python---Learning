@@ -40,7 +40,7 @@ for k, v in dict_cadastro.items():
   print(f'{k} tem valor igual a = {v}')'''
 
     
-dict_fut = {}
+'''dict_fut = {}
 dict_fut["Nome"] = str(input('Nome do jogador: '))
 dict_fut["Partidas"] = int(input('Total de partidas jogadas por ele: '))
 dict_fut["Gols"] = []
@@ -49,13 +49,27 @@ for c in range(1, dict_fut["Partidas"] + 1):
 dict_fut["Total"] = sum(dict_fut["Gols"]) 
 print('=-=' * 20)
 print(f'O jogador {dict_fut["Nome"]} jogou {dict_fut["Partidas"]} partidas. ') 
-for x in range(1, dict_fut["Partidas"] + 1):
-  print(f'Na {x}ª partida, {dict_fut["Gols"][x]} gols.')
-print(f'O total de gols, entretanto, foi de: {dict_fut["Total"]}')
+for x in range(0, dict_fut["Partidas"]):
+  print(f'Na {x + 1}ª partida, {dict_fut["Gols"][x]} gols.')
+print(f'O total de gols, entretanto, foi de: {dict_fut["Total"]}')'''
 
 
-
-
-
-for k, v in dict_fut.items():
-  print(f'{k} tem valor igual a = {v}')
+dict_pessoas = {}
+lista_pessoas = []
+while True:
+  dict_pessoas["Nome"] = str(input('Seu nome: '))
+  dict_pessoas["Sexo"] = str(input('Seu Sexo: [M/F]: ')).strip().upper()[0]
+  if dict_pessoas["Sexo"] == "F":
+    lista_pessoas.append(dict_pessoas["Sexo"])
+  dict_pessoas["Idade"] = int(input('Sua idade: '))
+  continuar = int(input('Deseja continuar? [1] Sim [2] Não:'))
+  if continuar == 2: break
+media_idade = sum(dict_pessoas["Idade"]) / len(dict_pessoas)
+print(f'Foram cadastradas {len(dict_pessoas)} pessoas.')
+print(f'A média de idade do grupo é igual a {media_idade}')
+print(f'Lista de mulheres: {lista_pessoas}')
+for c in dict_pessoas["Idade"]:
+  if c > media_idade:
+    lista_pessoas.clear()
+    lista_pessoas.append(c)
+print(f'Pessoas com idade superior a média: {lista_pessoas}')
