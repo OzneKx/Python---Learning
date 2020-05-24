@@ -54,7 +54,7 @@ for x in range(0, dict_fut["Partidas"]):
 print(f'O total de gols, entretanto, foi de: {dict_fut["Total"]}')'''
 
 
-dict_pessoas = {}
+'''dict_pessoas = {}
 lista_pessoas = []
 soma = 0
 while True:
@@ -69,11 +69,12 @@ while True:
   soma += dict_pessoas["Idade"]
   lista_pessoas.append(dict_pessoas.copy())
   while True:
-    continuar = int(input('Deseja continuar? [1] Sim [2] Não: '))
-    if continuar == 1 or continuar == 2: break
-    else:
-      print('Responda apenas [1] ou [2]! ')
-  if continuar == 2: break
+    continuar = input('Deseja continuar? [S/N]: ').strip().upper()[0]
+    if continuar in 'S/N': 
+      break
+    print('Responda apenas [S] ou [N]! ')
+  if continuar == 'N': 
+    break
 media_idade = soma / len(lista_pessoas)
 print(f'Foram cadastradas {len(lista_pessoas)} pessoas.')
 print(f'A média de idade do grupo é igual a {media_idade}')
@@ -88,4 +89,5 @@ for c in lista_pessoas:
     for k, v in c.items():
       print(f'{k} = {v}; ', end='')
     print()
-print('ACABOU')
+print('ACABOU')'''
+
