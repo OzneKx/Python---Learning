@@ -54,7 +54,7 @@ for x in range(0, dict_fut["Partidas"]):
 print(f'O total de gols, entretanto, foi de: {dict_fut["Total"]}')'''
 
 
-'''dict_pessoas = {}
+'dict_pessoas = {}
 lista_pessoas = []
 soma = 0
 while True:
