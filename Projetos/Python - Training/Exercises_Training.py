@@ -56,20 +56,36 @@ print(f'O total de gols, entretanto, foi de: {dict_fut["Total"]}')'''
 
 dict_pessoas = {}
 lista_pessoas = []
+soma = 0
 while True:
+  dict_pessoas.clear()
   dict_pessoas["Nome"] = str(input('Seu nome: '))
-  dict_pessoas["Sexo"] = str(input('Seu Sexo: [M/F]: ')).strip().upper()[0]
-  if dict_pessoas["Sexo"] == "F":
-    lista_pessoas.append(dict_pessoas["Sexo"])
+  while True:
+    dict_pessoas["Sexo"] = str(input('Seu Sexo: [M/F]: ')).strip().upper()[0]
+    if dict_pessoas["Sexo"] in "MF":
+      break
+    print('Digite apenas M ou F! ')
   dict_pessoas["Idade"] = int(input('Sua idade: '))
-  continuar = int(input('Deseja continuar? [1] Sim [2] Não:'))
+  soma += dict_pessoas["Idade"]
+  lista_pessoas.append(dict_pessoas.copy())
+  while True:
+    continuar = int(input('Deseja continuar? [1] Sim [2] Não: '))
+    if continuar == 1 or continuar == 2: break
+    else:
+      print('Responda apenas [1] ou [2]! ')
   if continuar == 2: break
-media_idade = sum(dict_pessoas["Idade"]) / len(dict_pessoas)
-print(f'Foram cadastradas {len(dict_pessoas)} pessoas.')
+media_idade = soma / len(lista_pessoas)
+print(f'Foram cadastradas {len(lista_pessoas)} pessoas.')
 print(f'A média de idade do grupo é igual a {media_idade}')
-print(f'Lista de mulheres: {lista_pessoas}')
-for c in dict_pessoas["Idade"]:
-  if c > media_idade:
-    lista_pessoas.clear()
-    lista_pessoas.append(c)
-print(f'Pessoas com idade superior a média: {lista_pessoas}')
+print('Lista de mulheres: ', end='')
+for c in lista_pessoas:
+  if c["Sexo"] == 'F':
+    print(f'{c["Nome"]} ', end='')
+print()
+print('Pessoas com idade superior a média: ')
+for c in lista_pessoas:
+  if c["Idade"] >= media_idade:
+    for k, v in c.items():
+      print(f'{k} = {v}; ', end='')
+    print()
+print('ACABOU')
