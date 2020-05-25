@@ -92,7 +92,7 @@ for c in lista_pessoas:
 print('ACABOU')'''
 
 
-'dict_fut = {}
+''dict_fut = {}
 while True:
   dict_fut["Nome"] = str(input('Nome do jogador: '))
   dict_fut["Partidas"] = int(input('Total de partidas jogadas por ele: '))
