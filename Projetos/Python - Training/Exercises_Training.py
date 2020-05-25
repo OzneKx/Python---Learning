@@ -93,13 +93,18 @@ print('ACABOU')'''
 
 
 '''dict_fut = {}
+lista_fut = []
+lista_partidas = []
 while True:
-  dict_fut["Nome"] = str(input('Nome do jogador: '))
-  dict_fut["Partidas"] = int(input('Total de partidas jogadas por ele: '))
-  dict_fut["Gols"] = []
-  for c in range(1, dict_fut["Partidas"] + 1):
-    dict_fut["Gols"].append(int(input(f'Números de gols na {c}ª partida: ')))
-  dict_fut["Total"] = sum(dict_fut["Gols"]) 
+  dict_fut.clear()
+  dict_fut["Nome"] = str(input('Nome do jogador: ')).capitalize()
+  total = int(input('Total de partidas jogadas por ele: '))
+  lista_partidas.clear()
+  for c in range(0, total):
+    lista_partidas.append(int(input(f'Números de gols na {c + 1}ª partida: ')))
+  dict_fut["Gols"] = lista_partidas[:]
+  dict_fut["Total"] = sum(lista_partidas)
+  lista_fut.append(dict_fut.copy()) 
   while True:
     continuar = input('Continuar? [S/N]: ').strip().upper()[0]
     if continuar in "SN":
@@ -108,7 +113,27 @@ while True:
   if continuar == 'N':
     break
 print('=-=' * 20)
-print(f'O jogador {dict_fut["Nome"]} jogou {dict_fut["Partidas"]} partidas. ') 
-for x in range(0, dict_fut["Partidas"]):
-  print(f'Na {x + 1}ª partida, {dict_fut["Gols"][x]} gols.')
-print(f'O total de gols, entretanto, foi de: {dict_fut["Total"]}')'''
+print('cod', end='')
+for i in dict_fut.keys():
+  print(f'{i:<15}', end='')
+print()
+print('=-=' * 20)
+for k, v in enumerate(lista_fut):
+  print(f'{k:>4} ', end='')
+  for d in v.values():
+    print(f'{str(d):<15}', end='')
+  print()
+print('=-=' * 20)
+while True:
+  buscar = int(input('Exibir dados de qual jogador? [999] para parar: '))
+  if buscar == 999: break
+  if buscar >= len(lista_fut):
+    print(f'Erro! Não existe jogador com código {buscar}! ')
+  else:
+    print(f' -- LEVANTAMENTO DO JOGADOR {lista_fut[buscar]["Nome"]}: ')
+    for i, g in enumerate(lista_fut[buscar]["Gols"]):
+      print(f'  no jogo {i + 1} fez {g} gols. ')
+  print(f'=-=' * 20)
+print('Volte Sempre! ')'''
+
+
