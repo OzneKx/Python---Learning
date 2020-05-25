@@ -111,4 +111,4 @@ print('=-=' * 20)
 print(f'O jogador {dict_fut["Nome"]} jogou {dict_fut["Partidas"]} partidas. ') 
 for x in range(0, dict_fut["Partidas"]):
   print(f'Na {x + 1}ª partida, {dict_fut["Gols"][x]} gols.')
-print(f'O total de gols, entretanto, foi de: {dict_fut["Total"]}')'
+print(f'O total de gols, entretanto, foi de: {dict_fut["Total"]}')''
