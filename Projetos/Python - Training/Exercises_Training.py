@@ -91,3 +91,24 @@ for c in lista_pessoas:
     print()
 print('ACABOU')'''
 
+
+dict_fut = {}
+while True:
+  dict_fut["Nome"] = str(input('Nome do jogador: '))
+  dict_fut["Partidas"] = int(input('Total de partidas jogadas por ele: '))
+  dict_fut["Gols"] = []
+  for c in range(1, dict_fut["Partidas"] + 1):
+    dict_fut["Gols"].append(int(input(f'Números de gols na {c}ª partida: ')))
+  dict_fut["Total"] = sum(dict_fut["Gols"]) 
+  while True:
+    continuar = input('Continuar? [S/N]: ').strip().upper()[0]
+    if continuar in "SN":
+      break
+    print('Responda com [S] ou [N]! ')
+  if continuar == 'N':
+    break
+print('=-=' * 20)
+print(f'O jogador {dict_fut["Nome"]} jogou {dict_fut["Partidas"]} partidas. ') 
+for x in range(0, dict_fut["Partidas"]):
+  print(f'Na {x + 1}ª partida, {dict_fut["Gols"][x]} gols.')
+print(f'O total de gols, entretanto, foi de: {dict_fut["Total"]}')
