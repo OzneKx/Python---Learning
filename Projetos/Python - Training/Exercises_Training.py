@@ -39,7 +39,7 @@ if dict_cadastro["CTPS"] != 0:
 for k, v in dict_cadastro.items():
   print(f'{k} tem valor igual a = {v}')'''
 
-    
+
 '''dict_fut = {}
 dict_fut["Nome"] = str(input('Nome do jogador: '))
 dict_fut["Partidas"] = int(input('Total de partidas jogadas por ele: '))
@@ -137,3 +137,95 @@ while True:
 print('Volte Sempre! ')'''
 
 
+'''def area(larg, compr):
+  print(f'Largura = {larg}m e Comprimento = {compr}m ')
+  resultado = larg * compr
+  print(f'{larg} x {compr} = {resultado}')
+  print(f'A área é igual a {resultado}m² ')
+
+
+largura = float(input('Largura (m): '))
+comprimento = float(input('Comprimento (m): '))
+area(largura, comprimento)'''
+
+
+'''def type(txt):
+  print('~' * len(txt))
+  print(txt)
+  print('~' * len(txt))
+
+
+palavra = str(input('Digite uma palavra: '))
+type(palavra)'''
+
+
+'''def count(i, f, p):
+    if p < 0:
+        p *= -1
+    if p == 0:
+        p = 1
+    print(f'De {i} até {f}, de {p} em {p}: ')
+    if i < f:
+        for c in range(i, f + 1, p):
+            print(c, end=' ')
+        print()
+    else:
+        for c in range(i, f - 1, - p):
+            print(c, end=' ')
+        print()
+
+
+# Programa Principal
+count(1, 10, 1)
+count(10, 0, 2)
+inicio = int(input('Início da contagem: '))
+fim = int(input('Final da contagem: '))
+passo = int(input('Pulando de quanto em quanto: '))
+count(inicio, fim, passo)'''
+
+
+'''from time import sleep
+
+
+def biggest(* num):
+  print(f'Os valores são: ')
+  if len(num) != 0:
+    for c in num:
+      print(f'{c} ', end='', flush=True)
+      sleep(0.4)
+    print(f'Num total de {len(num)}, o maior valor é: {max(num)}')
+    sleep(0.7)
+  else:
+    print('Nenhum valor foi informado! ')
+
+
+biggest(2, 9, 4, 5, 7, 1)
+biggest(4, 7, 0)
+biggest(1, 2)
+biggest(6)
+biggest()'''
+
+
+from random import randint
+from time import sleep
+
+
+def raffle(list_raffled):
+  for c in range(5):
+    num = randint(0, 100,)
+    list_raffled.append(num)
+    print(f'{num}', end=' ', flush=True)
+    sleep(0.3)
+  print('\nNúmeros Sorteados! ')
+
+def even_sum(list_raffled):
+  sum = 0
+  for c in list_raffled:
+    if c % 2 == 0:
+      sum += c
+  print(f'A soma entre os valores pares da lista: {list_raffled}, temos: {sum}')  
+
+
+list_raffled = []
+raffle(list_raffled)
+even_sum(list_raffled)
