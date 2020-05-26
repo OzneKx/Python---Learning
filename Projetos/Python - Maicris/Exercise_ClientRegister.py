@@ -89,7 +89,7 @@ def client_edit(clients):
         elif new_data == 'N':
             print('\033[31mNão houveram aterações de dados do cliente...\033[m ')  #Mensagem de erro em alterar os dados o cliente
             sleep()
--
+
 
 #Remove clientes
 def client_del(clients):
