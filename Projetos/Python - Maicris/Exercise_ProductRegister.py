@@ -70,4 +70,8 @@ def yes_or_no_value(message):
     if escolha in 'SN':
       return escolha
     else:
-      print('Inválido! Escolha [S] - sim ou [N] - não]' )
+      print('Inválido! Escolha [S] - sim ou [N] - não' )
+
+
+
+
