@@ -26,13 +26,24 @@ def ornament_two(text):
   print('-' * len(text))  
 
 
+def actual_time(date):
+  """
+  Importa a função date da library do Python
+
+  :param date: Exibe o ano atual
+
+  """
+  from datetime import dat
+  atual = date.today().year
+
+
 def menu():
-  ornament('Cadastro de Produtos')
+  ornament('Cadastro de Guitarras')
   ornament_two('SUAS OPÇÕES')
-  print('[1] Cadastrar Produto\n'
-        '[2] Alterar Produto\n'
-        '[3] Pesquisar Produto\n'
-        '[4] Listar Produtos\n'
+  print('[1] Cadastrar Guitarras\n'
+        '[2] Alterar Guitarras\n'
+        '[3] Pesquisar Guitarras\n'
+        '[4] Listar Guitarras\n'
         '[5] Remover Estoque\n'
         '[6] SAIR')
   return get_int_value_with_range('Digite uma das opções: ', 1, 6) 
@@ -42,6 +53,7 @@ def get_int_value_with_range(message: str, min_value: int, max_value: int) -> in
   """
   Valida dados inteiros em um determinado range
 
+  :param message: Retorna valor 
   :param min_value: Valor inteiro mínimo
   :param max_value: Valor inteiro máximo
   :return: Retorna a opção escolhida dentro do range 
@@ -57,13 +69,12 @@ def get_int_value_with_range(message: str, min_value: int, max_value: int) -> in
     else: return escolha
 
 
-def yes_or_no_value(message):
+def yes_or_no_value(guitarras):
   """
   Exibe mensagem de confirmação na tentativa de remoção do estoque
 
-  :param message: 
-
-
+  :param message: Mensagem exibida ao usuário antes de remover o estoque
+  :return: Retorna a escolha feita pelo usuário
   """
   while True:
     escolha = input(f'{message}: ')
@@ -73,5 +84,39 @@ def yes_or_no_value(message):
       print('Inválido! Escolha [S] - sim ou [N] - não' )
 
 
+def guitar_register(guitarras):
+  """
+  Registrar guitarra e suas especificações
 
+  :param guitarra: Características da guitarra ao cadastrá-la
+  """
+  model = input('Modelo da guitarra: ')
+  brand = input('Fabricante da guitarra: ')
+  year =get_int_value_with_range('Ano de fabricação: ', 1931, )
+
+
+
+def stockpile_remove(guitarras):
+  """
+  Remoção de guitarras do estoque a
+
+  :param guitarra: Identifica guitarras no estoque a serem removidos
+  """
+
+
+def main():
+  guitarras = {}
+  while True:
+    escolha = menu():
+    if escolha == 1:
+
+    if escolha == 2:
+
+    if escolha == 3:
+
+    if escolha == 4:
+
+    if escolha == 5:
+
+    if escolha == 6:
 
