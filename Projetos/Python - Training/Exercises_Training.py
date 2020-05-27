@@ -206,7 +206,7 @@ biggest(6)
 biggest()'''
 
 
-from random import randint
+'''from random import randint
 from time import sleep
 
 
@@ -228,4 +228,61 @@ def even_sum(list_raffled):
 
 list_raffled = []
 raffle(list_raffled)
-even_sum(list_raffled)
+even_sum(list_raffled)'''
+
+
+'''from datetime import date
+
+
+def vote(a):
+  atual = date.today().year
+  idade = (atual - a)
+  if idade < 16:
+    print(f'Você tem {idade} anos. Logo, o voto é NEGADO! ')
+  elif idade < 18 or idade >= 65:
+    print(f'Você tem {idade} anos. Logo o voto é OPCIONAL! ')
+  else: 
+    print(f'Você tem {idade} anos. Logo o voto é OBRIGATÓRIO! ') 
+
+
+nascimento = int(input('Digite o ano de nascimento: '))
+vote(nascimento)'''
+
+
+'''def factorial(num, opt=False):
+  """
+  Calcula o fatorial de um número.
+  :param num: Número a ser calculado.
+  :param opt: Mostrar ou não o cálculo (opcional).
+  :return: Valor do fatorial de um número n.
+  """
+  fact = 1
+  for c in range(num, 0, -1):
+      if opt:
+          print(c, end='')
+          if c > 1:
+              print(' x ', end='')
+          else:
+              print(' = ', end='')
+      fact *= c
+  return fact
+
+
+fatorial = int(input('Digite um número para calcular seu fatorial: '))
+print(factorial(fatorial, opt=True))'''
+
+
+def file(name='X', goal=0):
+  print(f'O jogador {name} fez {goal} gols no campeonato. ')
+
+
+nome = str(input('Nome do jogador: '))
+gols = str(input(f'Quantidade de gols de {nome}: '))
+if nome.strip() == '':
+  file(goal=gols)
+else:
+  file(nome, goal=gols)
+if gols.isnumeric():
+  gols = int(gols)
+else:
+  gols = 0
