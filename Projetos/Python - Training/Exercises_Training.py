@@ -284,6 +284,6 @@ else:
   file(nome, goal=gols)
 if gols.isnumeric():
   gols = int(gols)
-else:
-  gols =                       0
- 
+else: 
+  gols =                         0
+  
