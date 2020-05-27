@@ -1,7 +1,25 @@
 """
 Atividade Somativa - Raciocínio Algorítmico
 Cadastro de produtos num banco de dados
+
+guitarras {
+  serie: {
+    Modelo: ,
+    Marca: ,
+    Ano: ,
+    País: ,
+    Description: ,
+  }
+}
 """
+
+
+CONST_FIELD_MODEL = "Modelo"
+CONST_FIELD_BRAND = "Marca"
+CONST_FIELD_YEAR = "Ano de Fabricação"
+CONST_FIELD_COUNTRY = "Origem de Fabricação"
+CONST_FIELD_COST = "Custo"
+CONST_FIELD_DESCRIPTION = "Descrição"
 
 
 def ornament(txt):
@@ -30,11 +48,12 @@ def actual_time(date):
   """
   Importa a função date da library do Python
 
-  :param date: Exibe o ano atual
-
+  :param date: Identifica o ano atual
+  :return: Retorna a data do ano atual 
   """
-  from datetime import dat
+  from datetime import date
   atual = date.today().year
+  return atual
 
 
 def menu():
@@ -60,7 +79,7 @@ def get_int_value_with_range(message: str, min_value: int, max_value: int) -> in
   """
   while True:
     try:
-      escolha = int(input(f'{message}: '))
+      escolha = input(f'{message}: ').strip()
     except ValueError:
       print('Formato inválido! Digite um NÚMERO!')
       continue
@@ -69,7 +88,7 @@ def get_int_value_with_range(message: str, min_value: int, max_value: int) -> in
     else: return escolha
 
 
-def yes_or_no_value(guitarras):
+def yes_or_no_value(message):
   """
   Exibe mensagem de confirmação na tentativa de remoção do estoque
 
@@ -77,46 +96,117 @@ def yes_or_no_value(guitarras):
   :return: Retorna a escolha feita pelo usuário
   """
   while True:
-    escolha = input(f'{message}: ')
+    escolha = input(f'{message}: ').strip().upper()[0]
     if escolha in 'SN':
       return escolha
     else:
       print('Inválido! Escolha [S] - sim ou [N] - não' )
 
 
-def guitar_register(guitarras):
+def guitar_register(serie, guitarras):
   """
   Registrar guitarra e suas especificações
-
+  
+  :param guitarras: Número de série de produção da guitarra
   :param guitarra: Características da guitarra ao cadastrá-la
   """
-  model = input('Modelo da guitarra: ')
-  brand = input('Fabricante da guitarra: ')
-  year =get_int_value_with_range('Ano de fabricação: ', 1931, )
+  model = input('Modelo da guitarra: ').capitalize().strip()
+  brand = input('Fabricante da guitarra: ').capitalize().strip()
+  year = get_int_value_with_range('Ano de fabricação: ', 1931, actual_time).strip()
+  country = input('Origem da fabricação da guitarra: ').capitalize().strip()
+  cost = input('Valor do produto: R$').strip()
+  description = input('Descrição da guitarra: ').capitalize().strip()
+  guitarras[serie] = {
+    CONST_FIELD_MODEL: model,
+    CONST_FIELD_BRAND: brand,
+    CONST_FIELD_YEAR: year,
+    CONST_FIELD_COUNTRY: country,
+    CONST_FIELD_COST: cost,
+    CONST_FIELD_DESCRIPTION: description
+  }
 
+
+def guitar_edit(guitarras):
+  """
+  Altera dados dos registros da guitarra
+
+  :param guitarras: Exibe os dados dos registros de guitarras
+  :return: Mensagem da condição da alteração de dados da guitarra
+  """
+  serie = input('Número de série da guitarra: ')
+  if serie in guitarras:
+    guitar_register(serie, guitarras)
+    return True, "Especificações da guitarra alteradas com sucesso! "
+  else:
+    escolha = yes_or_no_value("Guitarra não localizada. Deseja cadastra-la?").strip().upper()[0]
+    if escolha == "S":
+      guitar_register(serie, guitarras)
+      return True, "Guitarra cadastrada com sucesso! "
+    else: 
+      return False, "Guitarra não localizada! "
+
+
+def search_guitar(guitarras):
+  """
+  Procura guitarras no banco de dados
+
+  :param guitarras: Possibilita a pesquisa de guitarras registradas
+  """
+  serie = input('Número de série da guitarra: ').strip()
+  if serie in guitarras:
+    print('Modelo da guitarra: ', guitarras[serie][CONST_FIELD_MODEL])
+    print('Marca da guitarra: ', guitarras[serie][CONST_FIELD_BRAND])
+    print('Ano de fabricação da guitarra: ', guitarras[serie][CONST_FIELD_YEAR])
+    print('Origem de fabricação da guitarra: ', guitarras[serie][CONST_FIELD_COUNTRY])
+    print('Custo da guitarra: ', guitarras[serie][CONST_FIELD_COST])
+    print('Descrição da guitarra: ', guitarras[serie][CONST_FIELD_DESCRIPTION])
+  else: 
+    print('Guitarra não localizada ')
+
+
+def list_guitar(guitarra):
+  """
+  Lista as guitarras contidas no dicionário
+
+  :param guitarra: Exibe as guitarras registradas no dicionário
+  """
+  for k, v in guitarra.items():
+    print(f'{k} : {v}')
 
 
 def stockpile_remove(guitarras):
   """
-  Remoção de guitarras do estoque a
+  Remoção de guitarras do estoque
 
   :param guitarra: Identifica guitarras no estoque a serem removidos
   """
+  serie = input('Digite o número de série da guitarra: ').strip()
+  if serie in guitarras:
+    escolha = yes_or_no_value('Certeza que deseja remover a guitarra do estoque').strip().upper()[0]
+    if escolha == 'S':
+      del guitarras[serie]
+      return True, 'Guitarra removida do estoque com sucesso! '
+    else:
+      return False, 'Nenhuma guitarra foi removida do estoque! '
 
 
 def main():
   guitarras = {}
   while True:
-    escolha = menu():
+    escolha = menu()
     if escolha == 1:
-
+      guitar_register(guitarras)
     if escolha == 2:
-
+      guitar_edit(guitarras)
     if escolha == 3:
-
+      search_guitar(guitarras)
     if escolha == 4:
-
+      list_guitar(guitarras)
     if escolha == 5:
-
+      stockpile_remove(guitarras)
     if escolha == 6:
+      break
 
+
+if __name__ == '__main__':
+  main()
