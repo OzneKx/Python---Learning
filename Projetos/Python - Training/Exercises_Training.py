@@ -285,4 +285,4 @@ else:
 if gols.isnumeric():
   gols = int(gols)
 else:
-  gols =        0
+  gols =         0
