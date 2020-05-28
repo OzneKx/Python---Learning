@@ -56,22 +56,6 @@ def actual_time():
   return atual
 
 
-def guitar_models(modelos: str):
-  """
-  Exibe uma lista sugestiva de modelos de guitarras
-
-  :param modelos: Modelos comuns de guitarras a serem cadastradas
-  """
-  tipos = input('[1] SG\n'
-                '[2] Les Paul\n'
-                '[3] Flying V\n'
-                '[4] Explorer\n'
-                '[5] Telecaster\n'
-                '[6] Stratocaster\n'
-                'Escolha: ')
-
-
-
 def menu():
   ornament('Cadastro de Guitarras')
   ornament_two('SUAS OPÇÕES')
@@ -127,7 +111,7 @@ def guitar_register(serie: int, guitarras) -> int:
   :param guitarras: Número de série de produção da guitarra
   :param guitarra: Características da guitarra ao cadastrá-la
   """
-  serie = input('Informe o número de série de produção da guitarra: ')
+  serie = input('Informe o número de série da guitarra: ')
   model = input('Modelo da guitarra: ').capitalize().strip()
   brand = input('Fabricante da guitarra: ').capitalize().strip()
   year = get_int_value_with_range('Ano de fabricação: ', 1931, actual_time())
