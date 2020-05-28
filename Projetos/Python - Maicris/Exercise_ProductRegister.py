@@ -68,7 +68,7 @@ def guitar_models(modelos: str):
                 '[4] Explorer\n'
                 '[5] Telecaster\n'
                 '[6] Stratocaster\n'
-                'Escolha: )
+                'Escolha: ')
 
 
 
