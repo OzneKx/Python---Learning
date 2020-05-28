@@ -13,6 +13,7 @@ guitarras {
 }
 """
 
+from datetime import date
 
 CONST_FIELD_MODEL = "Modelo"
 CONST_FIELD_BRAND = "Marca"
@@ -44,14 +45,13 @@ def ornament_two(text: str):
   print('-' * len(text))  
 
 
-def actual_time(date: str):
+def actual_time():
   """
   Importa a função date da library do Python
 
   :param date: Identifica o ano atual
   :return: Retorna a data do ano atual 
   """
-  from datetime import date
   atual = date.today().year
   return atual
 
@@ -79,13 +79,14 @@ def get_int_value_with_range(message: str, min_value: int, max_value: int) -> in
   """
   while True:
     try:
-      escolha = input(f'{message}: ').strip()
+      escolha = int(input(f'{message}').strip())
     except ValueError:
       print('Formato inválido! Digite um NÚMERO!')
       continue
     if not min_value <= escolha <= max_value:
       print(f'Opção inválida! Sua escolha deve ser entre {min_value} e {max_value}...')
-    else: return escolha
+    else: 
+      return escolha
 
 
 def yes_or_no_value(message: str):
@@ -112,7 +113,7 @@ def guitar_register(serie: int, guitarras) -> int:
   """
   model = input('Modelo da guitarra: ').capitalize().strip()
   brand = input('Fabricante da guitarra: ').capitalize().strip()
-  year = get_int_value_with_range('Ano de fabricação: ', 1931, actual_time).strip()
+  year = get_int_value_with_range('Ano de fabricação: ', 1931, actual_time())
   country = input('Origem da fabricação da guitarra: ').capitalize().strip()
   cost = input('Valor do produto: R$').strip()
   description = input('Descrição da guitarra: ').capitalize().strip()
