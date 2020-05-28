@@ -22,7 +22,7 @@ CONST_FIELD_COST = "Custo"
 CONST_FIELD_DESCRIPTION = "Descrição"
 
 
-def ornament(txt):
+def ornament(txt: str):
   """
   Enfeite de textos, de acordo com teu tamanho
 
@@ -33,7 +33,7 @@ def ornament(txt):
   print('~' * len(txt))
 
 
-def ornament_two(text):
+def ornament_two(text: str):
   """
   Outro enfeite de textos, de acordo com teu tamanho
 
@@ -44,7 +44,7 @@ def ornament_two(text):
   print('-' * len(text))  
 
 
-def actual_time(date):
+def actual_time(date: str):
   """
   Importa a função date da library do Python
 
@@ -88,7 +88,7 @@ def get_int_value_with_range(message: str, min_value: int, max_value: int) -> in
     else: return escolha
 
 
-def yes_or_no_value(message):
+def yes_or_no_value(message: str):
   """
   Exibe mensagem de confirmação na tentativa de remoção do estoque
 
@@ -103,7 +103,7 @@ def yes_or_no_value(message):
       print('Inválido! Escolha [S] - sim ou [N] - não' )
 
 
-def guitar_register(serie, guitarras):
+def guitar_register(serie: int, guitarras) -> int:
   """
   Registrar guitarra e suas especificações
   
@@ -191,11 +191,12 @@ def stockpile_remove(guitarras):
 
 
 def main():
+  serie = 0
   guitarras = {}
   while True:
     escolha = menu()
     if escolha == 1:
-      guitar_register(guitarras)
+      guitar_register(serie, guitarras)
     if escolha == 2:
       guitar_edit(guitarras)
     if escolha == 3:
