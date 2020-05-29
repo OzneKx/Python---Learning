@@ -156,12 +156,12 @@ def search_guitar(guitarras):
   """
   serie = input('Número de série da guitarra: ').strip()
   if serie in guitarras:
-    print('Modelo da guitarra: ', guitarras[serie][CONST_FIELD_MODEL])
-    print('Marca da guitarra: ', guitarras[serie][CONST_FIELD_BRAND])
-    print('Ano de fabricação da guitarra: ', guitarras[serie][CONST_FIELD_YEAR])
-    print('Origem de fabricação da guitarra: ', guitarras[serie][CONST_FIELD_COUNTRY])
-    print('Custo da guitarra: ', guitarras[serie][CONST_FIELD_COST])
-    print('Descrição da guitarra: ', guitarras[serie][CONST_FIELD_DESCRIPTION])
+    print('Modelo da guitarra:', guitarras[serie][CONST_FIELD_MODEL])
+    print('Marca da guitarra:', guitarras[serie][CONST_FIELD_BRAND])
+    print('Ano de fabricação da guitarra:', guitarras[serie][CONST_FIELD_YEAR])
+    print('Origem de fabricação da guitarra:', guitarras[serie][CONST_FIELD_COUNTRY])
+    print('Custo da guitarra:', guitarras[serie][CONST_FIELD_COST])
+    print('Descrição da guitarra:', guitarras[serie][CONST_FIELD_DESCRIPTION])
   else: 
     print('Guitarra não localizada ')
 
