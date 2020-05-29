@@ -40,9 +40,9 @@ def ornament_two(text: str):
 
   :param txt: Texto a ser exibido
   """
-  print('-' * len(text))
+  print('=' * len(text))
   print(text)
-  print('-' * len(text))  
+  print('=' * len(text))  
 
 
 def actual_time():
@@ -58,7 +58,7 @@ def actual_time():
 
 def menu():
   ornament('Cadastro de Guitarras')
-  ornament_two('SUAS OPÇÕES')
+  ornament_two('-----SUAS OPÇÕES-----')
   print('[1] Cadastrar Guitarras\n'
         '[2] Alterar Guitarras\n'
         '[3] Pesquisar Guitarras\n'
@@ -184,7 +184,7 @@ def stockpile_remove(guitarras):
   """
   serie = input('Digite o número de série da guitarra: ').strip()
   if serie in guitarras:
-    escolha = yes_or_no_value('Certeza que deseja remover a guitarra do estoque').strip().upper()[0]
+    escolha = yes_or_no_value('Certeza que deseja remover a guitarra do estoque [S/N]').strip().upper()[0]
     if escolha == 'S':
       del guitarras[serie]
       return True, 'Guitarra removida do estoque com sucesso! '
@@ -211,5 +211,5 @@ def main():
       break
 
 
-if __name__ == '__main__':
+if __name__ ==  '__main__':
   main()
