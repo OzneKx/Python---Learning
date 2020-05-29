@@ -173,7 +173,7 @@ def list_guitar(guitarra):
   :param guitarra: Exibe as guitarras registradas no dicionário
   """
   for k, v in guitarra.items():
-    print(f'{k} : {v}')
+    print(f'Número de série da guitarra e suas características -> {k} : {v}')
 
 
 def stockpile_remove(guitarras):
@@ -184,7 +184,7 @@ def stockpile_remove(guitarras):
   """
   serie = input('Digite o número de série da guitarra: ').strip()
   if serie in guitarras:
-    escolha = yes_or_no_value('Certeza que deseja remover a guitarra do estoque [S/N]').strip().upper()[0]
+    escolha = yes_or_no_value('Certeza que deseja remover a guitarra do estoque [S/N]: ').strip().upper()[0]
     if escolha == 'S':
       del guitarras[serie]
       return True, 'Guitarra removida do estoque com sucesso! '
