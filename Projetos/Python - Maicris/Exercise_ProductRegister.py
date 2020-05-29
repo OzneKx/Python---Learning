@@ -133,19 +133,18 @@ def guitar_edit(guitarras):
   Altera dados dos registros da guitarra
 
   :param guitarras: Exibe os dados dos registros de guitarras
-  :return: Mensagem da condição da alteração de dados da guitarra
   """
   serie = input('Número de série da guitarra: ')
   if serie in guitarras:
     guitar_register(serie, guitarras)
     return True, "Especificações da guitarra alteradas com sucesso! "
   else:
-    escolha = yes_or_no_value("Guitarra não localizada. Deseja cadastra-la?").strip().upper()[0]
+    escolha = yes_or_no_value("Guitarra não localizada. Deseja cadastrá-la?").strip().upper()[0]
     if escolha == "S":
       guitar_register(serie, guitarras)
-      return True, "Guitarra cadastrada com sucesso! "
+      print('Guitarra cadastrada com sucesso! ')
     else: 
-      return False, "Guitarra não localizada! "
+      print('Guitarra não localizada! ')
 
 
 def search_guitar(guitarras):
@@ -163,7 +162,12 @@ def search_guitar(guitarras):
     print('Custo da guitarra:', guitarras[serie][CONST_FIELD_COST])
     print('Descrição da guitarra:', guitarras[serie][CONST_FIELD_DESCRIPTION])
   else: 
-    print('Guitarra não localizada ')
+    escolha = yes_or_no_value("Guitarra não localizada. Deseja cadastrá-la?").strip().upper()[0]
+    if escolha == "S":
+      guitar_register(serie, guitarras)
+      print('Guitarra cadastrada com sucesso! ')
+    else: 
+      print('Guitarra não localizada! ')
 
 
 def list_guitar(guitarra):
@@ -187,9 +191,9 @@ def stockpile_remove(guitarras):
     escolha = yes_or_no_value('Certeza que deseja remover a guitarra do estoque [S/N]: ').strip().upper()[0]
     if escolha == 'S':
       del guitarras[serie]
-      return True, 'Guitarra removida do estoque com sucesso! '
+      print('Guitarra removida do estoque com sucesso! ')
     else:
-      return False, 'Nenhuma guitarra foi removida do estoque! '
+      print('Nenhuma guitarra foi removida do estoque! ')
 
 
 def main():
@@ -208,6 +212,7 @@ def main():
     if escolha == 5:
       stockpile_remove(guitarras)
     if escolha == 6:
+      print('Volte sempre! ')
       break
 
 
