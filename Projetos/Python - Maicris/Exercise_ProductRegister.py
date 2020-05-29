@@ -15,6 +15,7 @@ guitarras {
 
 from datetime import date
 
+
 CONST_FIELD_MODEL = "Modelo"
 CONST_FIELD_BRAND = "Marca"
 CONST_FIELD_YEAR = "Ano de Fabricação"
@@ -49,11 +50,18 @@ def actual_time():
   """
   Importa a função date da library do Python
 
-  :param date: Identifica o ano atual
   :return: Retorna a data do ano atual 
   """
   atual = date.today().year
   return atual
+
+
+def sleep():
+  """
+  Importa a função sleep da library do Python
+  """
+  from time import sleep                             
+  sleep(1.5)
 
 
 def menu():
@@ -65,6 +73,7 @@ def menu():
         '[4] Listar Guitarras\n'
         '[5] Remover Estoque\n'
         '[6] SAIR')
+  print('=' * 23)
   return get_int_value_with_range('Digite uma das opções: ', 1, 6) 
 
 
@@ -112,8 +121,21 @@ def guitar_register(serie: int, guitarras) -> int:
   :param guitarra: Características da guitarra ao cadastrá-la
   """
   serie = input('Informe o número de série da guitarra: ')
-  model = input('Modelo da guitarra: ').capitalize().strip()
-  brand = input('Fabricante da guitarra: ').capitalize().strip()
+  model = input('Modelo da guitarra: \n'
+                ' -> SG\n'
+                ' -> Les Paul\n'
+                ' -> Explorer\n'
+                ' -> Flying V\n'
+                ' -> Telecaster\n'
+                ' -> Stratocaster\n'
+                'Escolha: ').capitalize().strip()
+  brand = input('Fabricante da guitarra: \n'
+                ' -> Gibson\n'
+                ' -> Fender\n'
+                ' -> Ibanez\n'
+                ' -> Yamaha\n'
+                ' -> Epiphone\n'
+                'Escolha (Se for outra, digite aqui): ').capitalize().strip()
   year = get_int_value_with_range('Ano de fabricação: ', 1931, actual_time())
   country = input('Origem da fabricação da guitarra: ').capitalize().strip()
   cost = input('Valor do produto: R$').strip()
@@ -155,12 +177,12 @@ def search_guitar(guitarras):
   """
   serie = input('Número de série da guitarra: ').strip()
   if serie in guitarras:
-    print('Modelo da guitarra:', guitarras[serie][CONST_FIELD_MODEL])
-    print('Marca da guitarra:', guitarras[serie][CONST_FIELD_BRAND])
-    print('Ano de fabricação da guitarra:', guitarras[serie][CONST_FIELD_YEAR])
-    print('Origem de fabricação da guitarra:', guitarras[serie][CONST_FIELD_COUNTRY])
-    print('Custo da guitarra:', guitarras[serie][CONST_FIELD_COST])
-    print('Descrição da guitarra:', guitarras[serie][CONST_FIELD_DESCRIPTION])
+    print(f'Modelo da guitarra: {guitarras[serie][CONST_FIELD_MODEL]}')
+    print(f'Marca da guitarra: {guitarras[serie][CONST_FIELD_BRAND]}')
+    print(f'Ano de fabricação da guitarra: {guitarras[serie][CONST_FIELD_YEAR]} ')
+    print(f'Origem de fabricação da guitarra: {guitarras[serie][CONST_FIELD_COUNTRY]} ')
+    print(f'Custo da guitarra: {guitarras[serie][CONST_FIELD_COST]} ')
+    print(f'Descrição da guitarra: {guitarras[serie][CONST_FIELD_DESCRIPTION]} ')
   else: 
     escolha = yes_or_no_value("Guitarra não localizada. Deseja cadastrá-la?").strip().upper()[0]
     if escolha == "S":
@@ -212,8 +234,13 @@ def main():
     if escolha == 5:
       stockpile_remove(guitarras)
     if escolha == 6:
-      print('Volte sempre! ')
-      break
+      sair = yes_or_no_value('Certeza de que deseja sair do programa? [S/N]').strip().upper()[0]
+      if sair == 'S': 
+        print('Volte sempre! ')
+        break
+      else:
+        print('Você optou por não sair do programa! ')
+        sleep()
 
 
 if __name__ == '__main__':
