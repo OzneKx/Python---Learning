@@ -272,7 +272,7 @@ fatorial = int(input('Digite um número para calcular seu fatorial: '))
 print(factorial(fatorial, opt=True))'''
 
 
-def file(name='X', goal=0):
+'''def file(name='X', goal=0):
   print(f'O jogador {name} fez {goal} gols no campeonato. ')
 
 
@@ -285,5 +285,30 @@ else:
 if gols.isnumeric():
   gols = int(gols)
 else: 
-  gols =              0
-  
+  gols = 0'''
+
+
+'''def recognize(num):
+  ok = False
+  value = 0
+  while True:
+    n = str(input(num))
+    if n.isnumeric():
+      value = int(n)
+      ok = True
+    else:
+      print('ERRO! Digite um número inteiro válido! ')
+    if ok: 
+      break
+  return value
+
+
+n = recognize('Digite um número: ')
+print(f'Você digitou o valor {n}.')'''
+
+
+def score(*notas):
+  dict_notas = {}
+  while True:
+    nota = int(input(''))
+
