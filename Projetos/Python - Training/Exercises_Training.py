@@ -307,7 +307,7 @@ n = recognize('Digite um número: ')
 print(f'Você digitou o valor {n}.')'''
 
 
-def score(*notas, sit=False):
+'''def score(*notas, sit=False):
   dict_notas = {}
   dict_notas["Total"] = len(notas)
   dict_notas["Maior"] = max(notas)
@@ -324,4 +324,25 @@ def score(*notas, sit=False):
 
 
 resp = score(9, 10, 5.5, 2.5, 8.5, sit=True)
-print(resp)  
+print(resp)'''
+
+
+def helping(com):
+  help(com)
+
+
+def titles(msgm, color):
+  tam = len(msgm)
+  print('~' * tam)
+  print(msgm)
+  print('~' * tam)
+
+
+comando = ''
+while True:
+  titles('Sistema de Ajuda PyHELP')
+  comando = str(input("Função ou biblioteca? ")).strip().upper()
+  if comando == 'FIM':
+    break
+  else:
+    ajuda(comando)
