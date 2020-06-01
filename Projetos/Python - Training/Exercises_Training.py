@@ -307,8 +307,21 @@ n = recognize('Digite um número: ')
 print(f'Você digitou o valor {n}.')'''
 
 
-def score(*notas):
+def score(*notas, sit=False):
   dict_notas = {}
-  while True:
-    nota = int(input(''))
+  dict_notas["Total"] = len(notas)
+  dict_notas["Maior"] = max(notas)
+  dict_notas["Menor"] = min(notas)
+  dict_notas["Média"] = sum(notas) / len(notas)
+  if sit:
+    if dict_notas["Média"] >= 7:
+      dict_notas["Situação"] = 'Boa'
+    elif dict_notas["Média"] >= 5:
+      dict_notas["Situação"] = 'Média'
+    else:
+      dict_notas["Situação"] = 'Ruim'
+  return dict_notas
 
+
+resp = score(9, 10, 5.5, 2.5, 8.5, sit=True)
+print(resp)  
