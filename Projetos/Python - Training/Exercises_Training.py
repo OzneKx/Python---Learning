@@ -347,23 +347,3 @@ while True:
   else:
     ajuda(comando)'''
 
-
-def get_int_value_with_range(message: str, min_value: int, max_value: int) -> int:
-    """
-    Valida dados inteiros em um determinado range
-
-    :param message: A mensagem a ser exibida
-    :param min_value: Valor inteiro mínimo
-    :param max_value: Valor inteiro máximo
-    :return: Retorna a opção escolhida dentro do range
-    """
-    while True:
-        try:
-            op = int(input(message + ": "))  # recebe o número da opção escolhida
-        except ValueError:
-            print("Formato inválido: esperado um número")
-            continue
-        if not min_value <= op <= max_value:
-            print("Opção inválida: escolha um número de", min_value, "a", max_value)
-        else:
-            return op    
