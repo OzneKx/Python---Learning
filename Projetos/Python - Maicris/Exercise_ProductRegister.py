@@ -29,6 +29,7 @@ def ornament(txt: str):
   Enfeite de textos, de acordo com teu tamanho
 
   :param txt: Texto a ser exibido
+  :return: None
   """
   print('~' * len(txt))
   print(txt)
@@ -40,6 +41,7 @@ def ornament_two(text: str):
   Outro enfeite de textos, de acordo com teu tamanho
 
   :param txt: Texto a ser exibido
+  :return: None
   """
   print('=' * len(text))
   print(text)
@@ -59,6 +61,7 @@ def actual_time():
 def sleep():
   """
   Importa a função sleep da library do Python
+  :return: None
   """
   from time import sleep                             
   sleep(1.5)
@@ -119,6 +122,7 @@ def guitar_register(serie: int, guitarras) -> int:
   
   :param guitarras: Número de série de produção da guitarra
   :param guitarra: Características da guitarra ao cadastrá-la
+  :return: None
   """
   serie = input('Informe o número de série da guitarra: ')
   model = input('Modelo da guitarra: \n'
@@ -155,6 +159,7 @@ def guitar_edit(guitarras):
   Altera dados dos registros da guitarra
 
   :param guitarras: Exibe os dados dos registros de guitarras
+  :return: None
   """
   serie = input('Número de série da guitarra: ')
   if serie in guitarras:
@@ -174,6 +179,7 @@ def search_guitar(guitarras):
   Procura guitarras no banco de dados
 
   :param guitarras: Possibilita a pesquisa de guitarras registradas
+  :return: None
   """
   serie = input('Número de série da guitarra: ').strip()
   if serie in guitarras:
@@ -197,6 +203,7 @@ def list_guitar(guitarra):
   Lista as guitarras contidas no dicionário
 
   :param guitarra: Exibe as guitarras registradas no dicionário
+  :return: None
   """
   for k, v in guitarra.items():
     print(f'Número de série da guitarra e suas características -> {k} : {v}')
@@ -207,6 +214,7 @@ def stockpile_remove(guitarras):
   Remoção de guitarras do estoque
 
   :param guitarra: Identifica guitarras no estoque a serem removidos
+  :return: None
   """
   serie = input('Digite o número de série da guitarra: ').strip()
   if serie in guitarras:
