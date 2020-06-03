@@ -154,7 +154,7 @@ def main():
         if escolha == 5:
             stockpile_remove(guitars)
         if escolha == 6:
-            sair = yes_or_no_value('Certeza de que deseja sair do programa? [S/N]').strip().upper()[0]
+            sair = util.yes_or_no_value('Certeza de que deseja sair do programa? [S/N]').strip().upper()[0]
             if sair == 'S':
                 print('Volte sempre! ')
                 break
