@@ -189,8 +189,9 @@ def search_guitar(guitarras):
     print(f'Origem de fabricação da guitarra: {guitarras[serie][CONST_FIELD_COUNTRY]} ')
     print(f'Custo da guitarra: {guitarras[serie][CONST_FIELD_COST]} ')
     print(f'Descrição da guitarra: {guitarras[serie][CONST_FIELD_DESCRIPTION]} ')
+    sleep()
   else: 
-    escolha = yes_or_no_value("Guitarra não localizada. Deseja cadastrá-la?").strip().upper()[0]
+    escolha = yes_or_no_value("Guitarra não localizada. Deseja cadastrá-la? [S/N]").strip().upper()[0]
     if escolha == "S":
       guitar_register(serie, guitarras)
       print('Guitarra cadastrada com sucesso! ')
@@ -207,6 +208,7 @@ def list_guitar(guitarra):
   """
   for k, v in guitarra.items():
     print(f'Número de série da guitarra e suas características -> {k} : {v}')
+  sleep()
 
 
 def stockpile_remove(guitarras):
