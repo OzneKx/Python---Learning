@@ -87,7 +87,7 @@ def guitar_edit(guitars):
 
 def search_guitar(guitars):
     """
-    Procura guitarras no banco de dados
+    Pesquisa guitarras no banco de dados
 
     :param guitars: Possibilita a pesquisa de guitarras registradas
     :return: None
