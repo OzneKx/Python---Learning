@@ -132,3 +132,19 @@ def yes_or_no_value(message: str):
             print('Inválido! Escolha [S] - sim ou [N] - não')
 
 
+def open_file_using_pickle(name: str):
+    """
+    Abrir uma file utilizando o pickle para escrever
+
+    :param name: Nome da file
+    :return: None
+    """
+    try:
+        obj = open(name, 'rb')
+        pickle.load(name, obj)
+        return
+    except FileNotFoundError:
+        obj= open(name, 'wb')
+        pickle.dump(name, obj)
+        pickle.load(name, 'rb')
+        return
