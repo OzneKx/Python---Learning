@@ -1,5 +1,5 @@
 """
-Guitar module
+Module Utilities
 """
 
 
@@ -36,13 +36,14 @@ def actual_time():
 
     :return: Retorna a data do ano atual
     """
-    atual = date.today().year
-    return atual
+    current = date.today().year
+    return current
 
 
 def sleep():
     """
     Importa a função sleep da library do Python
+
     :return: None
     """
     from time import sleep
@@ -60,14 +61,14 @@ def get_int_value_with_range(message: str, min_value: int, max_value: int) -> in
     """
     while True:
         try:
-            escolha = int(input(message).strip())
+            choice = int(input(message).strip())
         except ValueError:
             print('Formato inválido! Digite um NÚMERO!')
             continue
-        if not min_value <= escolha <= max_value:
+        if not min_value <= choice <= max_value:
             print(f'Opção inválida! Sua escolha deve ser entre {min_value} e {max_value}...')
         else:
-            return escolha
+            return choice
 
 
 def get_int_value(message: str):
@@ -105,14 +106,15 @@ def get_str_value(message: str):
     Valida dados informados pelo usuário
 
     :param message: Mensagem do input exibida ao usuário
-    :return palavra: Valor escrito informado pelo usuário
+    :return palavra: None
     """
     while True:
         try:
-            palavra = str(input(message))
-            return palavra
+            word = str(input(message).strip())
+            return word
         except ValueError:
-            print('Digite uma palavra! ')
+            print('Formato inválido! Digite uma palavra!')
+            continue
 
 
 def yes_or_no_value(message: str):
@@ -123,8 +125,8 @@ def yes_or_no_value(message: str):
     :return: Retorna a escolha feita pelo usuário
     """
     while True:
-        escolha = input(f'{message}: ').strip().upper()[0]
-        if escolha in 'SN':
-            return escolha
+        choice = input(f'{message}: ').strip().upper()[0]
+        if choice in 'SN':
+            return choice
         else:
             print('Inválido! Escolha [S] - sim ou [N] - não')
