@@ -4,6 +4,7 @@ Module Utilities
 
 
 from datetime import date
+import pickle
 
 
 def ornament(txt: str):
@@ -109,12 +110,11 @@ def get_str_value(message: str):
     :return palavra: None
     """
     while True:
-        try:
-            word = str(input(message).strip())
-            return word
-        except ValueError:
-            print('Formato inválido! Digite uma palavra!')
-            continue
+        word = input(message).strip()
+        if not word.isalpha():
+            print('INVÁLIDO! Utilize letras! ')
+        else: 
+            break
 
 
 def yes_or_no_value(message: str):
@@ -130,3 +130,5 @@ def yes_or_no_value(message: str):
             return choice
         else:
             print('Inválido! Escolha [S] - sim ou [N] - não')
+
+
