@@ -4,6 +4,7 @@ Guitar Registration
 
 
 import utilities as util
+import pickle
 
 
 CONST_FIELD_MODEL = "Modelo"
