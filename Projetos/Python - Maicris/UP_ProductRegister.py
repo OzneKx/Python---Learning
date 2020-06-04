@@ -102,7 +102,7 @@ def search_guitar(guitars):
         print(f'Descrição da guitarra: {guitars[serie][CONST_FIELD_DESCRIPTION]} ')
         util.sleep()
     else:
-        escolha = util.yes_or_no_value("Guitarra não localizada. Deseja cadastrá-la? [S/N]").strip().upper()[0]
+        escolha = util.yes_or_no_value('Guitarra não localizada. Deseja cadastrá-la? [S/N]').strip().upper()[0]
         if escolha == "S":
             guitar_register(guitars)
             print('Guitarra cadastrada com sucesso! ')
