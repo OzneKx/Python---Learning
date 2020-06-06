@@ -60,6 +60,7 @@ def guitar_register(serial: int, guitars: dict):
     country = util.get_str_value('Origem da fabricação da guitarra: ')
     cost = util.get_float_value('Valor do produto: R$')
     description = input('Descrição da guitarra: ').title().strip()
+    amount = util.get_int_value('Quantidade para adicionar: ')
     guitars[serial] = {
         CONST_FIELD_MODEL: model,
         CONST_FIELD_BRAND: brand,
@@ -67,7 +68,7 @@ def guitar_register(serial: int, guitars: dict):
         CONST_FIELD_COUNTRY: country,
         CONST_FIELD_COST: cost,
         CONST_FIELD_DESCRIPTION: description,
-        CONST_FIELD_TOTAL: 0
+        CONST_FIELD_TOTAL: amount
     }
 
 
@@ -126,6 +127,7 @@ def search_guitar(guitars: dict):
         print(f'País de Fabricação da guitarra: {guitars[serial][CONST_FIELD_COUNTRY]} ')
         print(f'Custo da guitarra: R${guitars[serial][CONST_FIELD_COST]} ')
         print(f'Descrição da guitarra: {guitars[serial][CONST_FIELD_DESCRIPTION]} ')
+        print(f'Quantidade no estoque: {guitars[serial][CONST_FIELD_TOTAL]} ')
     else:
         choice = util.yes_or_no_value('Guitarra não localizada. Deseja cadastrá-la? [S/N]')
         if choice == "S":
