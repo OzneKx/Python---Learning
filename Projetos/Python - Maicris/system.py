@@ -17,7 +17,6 @@ sales = {
         total: 100
     }
 }
-
 """
 
 
@@ -27,9 +26,9 @@ import clients as cli
 import pickle
 
 
+CONST_FIELD_IDENTIFICATION = "Identidade"
 CONST_FIELD_QUANTITY = "Quantidade"
 CONST_FIELD_VALUE = "Valor Total"
-CONST_FILE_NAME = "database"
 
 
 def menu():
@@ -45,57 +44,63 @@ def menu():
     return util.get_int_value_with_range('Digite uma das opções: ', 1, 6)
 
 
-def create_order(clients: dict, guitars: dict, sales: dict, identification: int, serial: int):
-    util.file_read_bin("cliente")
-    resp = cli.client_search(clients)
-    if resp:
-        print('Venda será prosseguida! ')
-        ans = gui.search_guitar(guitars)
-        if ans:
-            print('Guitarra disponível! ')
-
-
+def create_order(clients: dict, guitars: dict, sales: dict, identification: int, serial: int,
+                 cost: float):
+    identification = util.get_int_value('Informe sua identidade: ')
+    if identification not in clients:
+        choice = util.yes_or_no_value('Não é cadastrado ainda. Gostaria de se cadastrar? [S/N]')
+        if choice == 'N':
+            print('Você optou por não se cadastrar, logo não poderá fazer nenhuma compra... Se cadastre antes! ') 
         else:
-            print('Guitarra não encontrada... ')
-            choice = util.yes_or_no_value('Guitarra não localizado! Deseja cadastrá-la? [S/N]')
-            if choice == 'S':
-                gui.guitar_register(serial, guitars)
-                return True, 'Guitarra cadastrada com sucesso! '
-            else:
-                return False, 'Guitarra não foi cadastrada... '
-    else:
-        print('Cliente não cadastrado no sistema... ')
-        choice = util.yes_or_no_value('Cliente não localizado. Deseja cadastra-lo? [S/N]')
-        if choice == "S":
             cli.client_register(identification, clients)
-            print('Cliente cadastrado com sucesso! ')
-        else:
-            print('Cliente não foi cadastrado... ')
+            print('Cadastro efetuado com sucesso! Agora poderá fazer compras! ')
+            print('Estas são as guitarras disponíveis no estoque: ')
+            for k, v in guitars.items():
+                print(f'{k} = {v}')
+            while True:
+                buy = util.get_int_value('Número de série da guitarra que gostaria de comprar: ')
+                if buy not in guitars:
+                    print('Guitarra não disponível, tente novamente mais tarde!  ')
+                else:
+                    print(f'{guitars[serial][gui.CONST_FIELD_MODEL][gui.CONST_FIELD_BRAND]} é uma ótima escolha! ')
+                    amount = util.get_int_value('Informe quantas unidades gostaria de comprar: ')
+                    if guitars[serial][gui.CONST_FIELD_TOTAL] - amount > 0:
+                        guitars[serial][gui.CONST_FIELD_TOTAL] = amount
+                        cost = guitars[serial][gui.CONST_FIELD_COST] * amount
+                        sales[order] = {clients[identification], guitars[serial], CONST_FIELD_VALUE: cost}
+                        print(f'Pedido efetuado, {clients[cli.CONST_FIELD_NAME]}! ')
+                        more = util.yes_or_no_value('Gostaria de comprar mais uma guitarras? [S/N]')
+                        if more == 'N':
+                            print('Agradeço por ter comprado o produto! Volte sempre! ')
+                        else:
+                            continue
+                    else:
+                        print('Não temos mais itens como este no estoque... Volte em outro momento :/')
+
 
 
 def cancel_order():
 
 
-def order_summary():
 
+def order_summary():
+    print('-' * 10, 'Resumo de pedidos', '-' * 10)
+    print()
 
 def general_order_report():
+
 
 
 def specific_order_report():
 
 
+
+
+
 def main():
-    # database = {
-        #"Cliente": clients,
-        #"Guitarras": guitars,
-        #"Venda": sales
-    # }
-
-    sales = {}
-    guitars = {}
-    clients = {}
-
+    file_guitars = 'guitarras'
+    file_clients = 'cliente'
+    file_sales = 'sale'
     database = util.file_read_bin(CONST_FILE_NAME)
     if "clients" in database:
         clients = database["Clients"]
