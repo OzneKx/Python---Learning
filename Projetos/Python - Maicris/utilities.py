@@ -7,30 +7,6 @@ from datetime import date
 import pickle
 
 
-def ornament(txt: str):
-    """
-    Enfeite de textos, de acordo com teu tamanho
-
-    :param txt: Texto a ser exibido
-    :return: None
-    """
-    print('~' * len(txt))
-    print(txt)
-    print('~' * len(txt))
-
-
-def ornament_two(text: str):
-    """
-    Outro enfeite de textos, de acordo com teu tamanho
-
-    :param text: Texto a ser exibido
-    :return: None
-    """
-    print('=' * len(text))
-    print(text)
-    print('=' * len(text))
-
-
 def actual_time():
     """
     Importa a função date da library do Python
@@ -39,16 +15,6 @@ def actual_time():
     """
     current = date.today().year
     return current
-
-
-def sleep():
-    """
-    Importa a função sleep da library do Python
-
-    :return: None
-    """
-    from time import sleep
-    sleep(1.5)
 
 
 def get_int_value_with_range(message: str, min_value: int, max_value: int) -> int:
@@ -62,7 +28,7 @@ def get_int_value_with_range(message: str, min_value: int, max_value: int) -> in
     """
     while True:
         try:
-            choice = int(input(message).strip())
+            choice = int(input(message))
         except ValueError:
             print('Formato inválido! Digite um NÚMERO!')
             continue
@@ -107,14 +73,20 @@ def get_str_value(message: str):
     Valida dados informados pelo usuário
 
     :param message: Mensagem do input exibida ao usuário
-    :return palavra: None
+    :return palavra: Retorna o input do usuário
     """
+    report = ''
     while True:
-        word = input(message).strip()
-        if not word.isalpha():
-            print('INVÁLIDO! Utilize letras! ')
-        else: 
-            break
+        word = input(message).title()
+        for c in word:
+            if c.isnumeric():
+                report = True
+            else:
+                report = False
+        if report:
+            print('Inválido! Insira apenas letras! ')
+        else:
+            return word
 
 
 def yes_or_no_value(message: str):
@@ -132,19 +104,36 @@ def yes_or_no_value(message: str):
             print('Inválido! Escolha [S] - sim ou [N] - não')
 
 
-def open_file_using_pickle(name: str):
+def save_in_file_dict(name: str, dict_name: dict):
     """
-    Abrir uma file utilizando o pickle para escrever
+    Salvar um dicionário em um arquivo binário.
 
-    :param name: Nome da file
-    :return: None
+    :param name: Nome do Arquivo.
+    :param dict_name: Nome do Dicionário.
+    :return: Arquivo salvo
     """
+    with open(name, "wb") as f:
+        pickle.dump(dict_name, f)
+    return
+
+
+def file_read_bin(filename: str) -> dict:
+    """
+    Leitura do arquivo, porém, caso não exista, será criado um
+
+    :param filename: Nome do arquivo de gravação
+    :return: Lista com os dados lidos
+    """
+    content = {}
     try:
-        obj = open(name, 'rb')
-        pickle.load(name, obj)
-        return
+        file = open(filename, "rb")
+        content = pickle.load(file)
+        file.close()
+        return content
     except FileNotFoundError:
-        obj= open(name, 'wb')
-        pickle.dump(name, obj)
-        pickle.load(name, 'rb')
-        return
+        with open(filename, "wb") as f:
+            pickle.dump(content, f)
+        file = open(filename, "rb")
+        content = pickle.load(file)
+        file.close()
+    return content
