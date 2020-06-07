@@ -1,5 +1,11 @@
 """
 Sales System
+
+Numero do Pedido = {Identidade do Cliente: "Nome", "Cidade, "Idade",
+                    Produto:
+                        [{"Modelo", "Marca",
+                         "Quantidade", "Valor Total"]}
+
 """
 
 
@@ -52,7 +58,7 @@ def create_order(clients: dict, guitars: dict, sales: dict, identification: int)
     """
     print('Estas são as guitarras disponíveis no estoque: ')
     for k, v in guitars.items():
-        print(f'{k} = {v}')
+        print(f'N° série: {k} = {v}')
     order = util.get_int_value('Número do pedido: ')
     if order not in sales:
         while True:
@@ -81,7 +87,7 @@ def create_order(clients: dict, guitars: dict, sales: dict, identification: int)
                     print(f'O estoque contém apenas {guitars[serial][gui.CONST_FIELD_TOTAL]} produtos.\n'
                           f'Portanto, ele não pode se esgotar :) ')
     else:
-        print('Insira outro número de pedido! ')
+        print('Número de pedido já existente! Insira outro, por gentileza. ')
 
 
 def cancel_order(sales: dict):
@@ -91,9 +97,9 @@ def cancel_order(sales: dict):
      :param sales: Remove clientes do banco de dados
      :return: None
      """
+    order = util.get_int_value('Número do pedido que deseja cancelar: ')
     choice = util.yes_or_no_value('Certeza de que gostaria de cancelar o pedido? [S/N]')
     if choice == 'S':
-        order = util.get_int_value('Número do pedido: ')
         sales.pop(order)
         print('Pedido cancelado com sucesso! ')
     else:
@@ -109,13 +115,13 @@ def order_summary(sales: dict):
     """
     order = util.get_int_value('Informe o número do pedido: ')
     if order in sales:
-        print('-' * 13, 'Resumo do Pedido', '-' * 13)
-        print(f'| Nome  do  comprador: {sales[order][CONST_FIELD_IDENTIFICATION][cli.CONST_FIELD_NAME]:>20}|')
-        print(f'| Modelo  da guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_MODEL]:>20}|')
-        print(f'| Marca  da  guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_BRAND]:>20}|')
-        print(f'| Quantidade comprada: {sales[order][CONST_FIELD_ORDER][0][CONST_FIELD_QUANTITY]:>20}|')
-        print(f'| Total (REAIS -> R$): {sales[order][CONST_FIELD_ORDER][0][CONST_FIELD_VALUE]:>20.2f}|')
-        print('-' * 44)
+        print('-' * 14, 'Resumo do Pedido', '-' * 13)
+        print(f'| Nome  do  comprador: {sales[order][CONST_FIELD_IDENTIFICATION][cli.CONST_FIELD_NAME]:>20} |')
+        print(f'| Modelo  da guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_MODEL]:>20} |')
+        print(f'| Marca  da  guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_BRAND]:>20} |')
+        print(f'| Quantidade comprada: {sales[order][CONST_FIELD_ORDER][0][CONST_FIELD_QUANTITY]:>20} |')
+        print(f'| Total (REAIS -> R$): {sales[order][CONST_FIELD_ORDER][0][CONST_FIELD_VALUE]:>20.2f} |')
+        print('-' * 45)
     else:
         print('Nenhum pedido corresponde ao número informado... Tente novamente! ')
 
@@ -129,7 +135,7 @@ def general_order_report(sales: dict):
     """
     if len(sales) > 0:
         for k, v in sales.items():
-            print(f'{k} : {v}')
+            print(f'N° pedido: {k} : {v}')
     else:
         print('Nenhuma venda foi feita até então')
 
@@ -190,7 +196,7 @@ def main():
             leave = util.yes_or_no_value('Certeza de que deseja sair do programa? [S/N]')
             if leave == 'S':
                 print('Volte sempre! ')
-                util.save_in_file_dict("sales", sales)
+                util.save_in_file_dict("sales", sales)  # Salvar um dicionário em um arquivo binário
                 break
             else:
                 print('Você optou por não sair do programa! ')
