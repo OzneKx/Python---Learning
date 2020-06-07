@@ -21,15 +21,16 @@ def menu():
 
     :return: Opção escolhida pelo usuário
     """
-    print('Cadastro de Guitarras')
-    print('-----SUAS OPÇÕES-----')
+    print('=' * 27)
+    print(f'{"Cadastro de Guitarras":^27}')
+    print('-' * 7, "Suas Opções", '-' * 7)
     print('[1] Cadastrar Guitarras\n'
           '[2] Alterar Guitarras\n'
           '[3] Pesquisar Guitarras\n'
           '[4] Listar Guitarras\n'
           '[5] Alterar Estoque\n'
           '[6] SAIR')
-    print('=' * 23)
+    print('=' * 27)
     return util.get_int_value_with_range('Digite uma das opções: ', 1, 6)
 
 
@@ -139,7 +140,7 @@ def search_guitar(guitars: dict):
 
 def list_guitar(guitars: dict):
     """
-    Lista as guitarras contidas no dicionário
+    Lista as guitarras registradas
 
     :param guitars: Exibe as guitarras registradas no dicionário
     :return: None
@@ -148,7 +149,7 @@ def list_guitar(guitars: dict):
         for k, v in guitars.items():
             print(f'Número de série da guitarra e suas características -> {k} : {v}')
     else:
-        print('Antes de listar produtos, você precisa registra-lo... ')
+        print('Antes de listar produtos, você precisa registra-los... ')
         serial = util.get_int_value('Informe o número de série da guitarra: ')
         choice = util.yes_or_no_value('Deseja cadastrá-la? [S/N]')
         if choice == "S":
@@ -216,12 +217,12 @@ def main(guitars: dict):
             leave = util.yes_or_no_value('Certeza de que deseja sair do programa? [S/N]')
             if leave == 'S':
                 print('Volte sempre! ')
-                util.save_in_file_dict("guitarras", guitars)
+                util.save_in_file_dict("guitarras", guitars)    # Salvar um dicionário em um arquivo binário
                 break
             else:
                 print('Você optou por não sair do programa... ')
 
 
 if __name__ == '__main__':
-    var = util.file_read_bin("guitarras")
+    var = util.file_read_bin("guitarras")   # Leitura do arquivo, porém, caso não exista, será criado um
     main(var)
