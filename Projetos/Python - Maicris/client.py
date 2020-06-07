@@ -122,9 +122,13 @@ def client_search(clients: dict):
     """
     identification = util.get_int_value('Informe a identidade do cliente que deseja pesquisar: ')
     if identification in clients:
-        print(f'Nome do cliente: {clients[identification][CONST_FIELD_NAME]} ')
-        print(f'Cidade do cliente: {clients[identification][CONST_FIELD_CITY]} ')
-        print(f'Idade do cliente: {clients[identification][CONST_FIELD_AGE]} ')
+        print('-' * 33)
+        print('-' * 6, 'Cliente Encontrado', '-' * 7)
+        print('-' * 33)
+        print(f'| Nome  do  cliente: {clients[identification][CONST_FIELD_NAME]:>10} | \n'
+              f'| Cidade do cliente: {clients[identification][CONST_FIELD_CITY]:>10} | \n'
+              f'| Idade  do cliente: {clients[identification][CONST_FIELD_AGE]:>10} |')
+        print('-' * 33)
     else:
         choice = util.yes_or_no_value('Cliente não localizado. Deseja cadastra-lo? [S/N]')
         if choice == "S":
