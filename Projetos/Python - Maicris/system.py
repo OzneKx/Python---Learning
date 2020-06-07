@@ -25,8 +25,9 @@ def menu():
 
     :return: Opção escolhida pelo usuário
     """
-    print('----------Sistema de Vendas----------')
-    print('-------------SUAS OPÇÕES-------------')
+    print('=' * 37)
+    print(f'{"Sistema de Vendas":^38}')
+    print('-' * 12, "Suas Opções", '-' * 12)
     print('[1] Criar Pedido\n'
           '[2] Cancelar Pedido\n'
           '[3] Resumo de Pedidos\n'
@@ -35,7 +36,7 @@ def menu():
           '[6] Acessar Módulo de Clientes\n'
           '[7] Acessar Módulo de Guitarras\n'
           '[8] SAIR')
-    print('=' * 35)
+    print('=' * 37)
     return util.get_int_value_with_range('Digite uma das opções: ', 1, 8)
 
 
