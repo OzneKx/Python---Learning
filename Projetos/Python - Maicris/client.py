@@ -17,16 +17,18 @@ def menu_clients():
 
     :return: Opção escolhida pelo usuário
     """
-    print('Cadastro de Clientes')
-    print('-----SUAS OPÇÕES-----')
+    print('=' * 30)
+    print(f'{"Cadastro de Clientes":^30}')
+    print('-' * 8, "Suas Opções", '-' * 8)
     print('[1] Cadastrar Cliente\n'
           '[2] Alterar dados de cliente\n'
           '[3] Excluir cliente\n'
           '[4] Pesquisar Cliente\n'
           '[5] Zerar Banco de Dados\n'
-          '[6] SAIR')
-    print('=' * 23)
-    return util.get_int_value_with_range('Digite uma das opções: ', 1, 6)
+          '[6] Listar Clientes\n'
+          '[7] SAIR')
+    print('=' * 30)
+    return util.get_int_value_with_range('Digite uma das opções: ', 1, 7)
 
 
 def client_register(identification: int, clients: dict):
@@ -140,6 +142,27 @@ def database_clear(clients: dict):
         print('O banco de dados não foi deletado... ')
 
 
+def list_clients(clients: dict):
+    """
+    Lista os clientes registrados
+
+    :param clients: Exibe os clientes registrados no dicionário
+    :return: None
+    """
+    if len(clients) > 0:
+        for k, v in clients.items():
+            print(f'Identidade do cliente e seus dados -> {k} : {v}')
+    else:
+        print('Antes de listar clientes, você precisa registra-los... ')
+        identification = util.get_int_value('Informe a identidade do cliente: ')
+        choice = util.yes_or_no_value('Deseja cadastrá-lo? [S/N]')
+        if choice == "S":
+            client_register(identification, clients)
+            print('Cliente cadastrado com sucesso! ')
+        else:
+            print('Você optou por não registrar nenhum cliente no momento. ')
+
+
 def main(clients: dict):
     """
     Ponto principal do programa
@@ -162,15 +185,17 @@ def main(clients: dict):
         elif choice == 5:
             database_clear(clients)
         elif choice == 6:
+            list_clients(clients)
+        elif choice == 7:
             leave = util.yes_or_no_value('Certeza de que deseja sair do programa? [S/N]')
             if leave == 'S':
                 print('Volte sempre! ')
-                util.save_in_file_dict("cliente", clients)
+                util.save_in_file_dict("cliente", clients)  # Salvar um dicionário em um arquivo binário
                 break
             else:
                 print('Você optou por não sair do programa! ')
 
 
 if __name__ == '__main__':
-    var = util.file_read_bin("cliente")
+    var = util.file_read_bin("cliente")     # Leitura do arquivo, porém, caso não exista, será criado um
     main(var)
