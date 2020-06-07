@@ -115,12 +115,14 @@ def order_summary(sales: dict):
     """
     order = util.get_int_value('Informe o número do pedido: ')
     if order in sales:
+        print('-' * 45)
         print('-' * 14, 'Resumo do Pedido', '-' * 13)
-        print(f'| Nome  do  comprador: {sales[order][CONST_FIELD_IDENTIFICATION][cli.CONST_FIELD_NAME]:>20} |')
-        print(f'| Modelo  da guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_MODEL]:>20} |')
-        print(f'| Marca  da  guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_BRAND]:>20} |')
-        print(f'| Quantidade comprada: {sales[order][CONST_FIELD_ORDER][0][CONST_FIELD_QUANTITY]:>20} |')
-        print(f'| Total (REAIS -> R$): {sales[order][CONST_FIELD_ORDER][0][CONST_FIELD_VALUE]:>20.2f} |')
+        print('-' * 45)
+        print(f'| Nome  do  comprador: {sales[order][CONST_FIELD_IDENTIFICATION][cli.CONST_FIELD_NAME]:>20} |\n'
+              f'| Modelo  da guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_MODEL]:>20} |\n'
+              f'| Marca  da  guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_BRAND]:>20} |\n'
+              f'| Quantidade comprada: {sales[order][CONST_FIELD_ORDER][0][CONST_FIELD_QUANTITY]:>20} |\n'
+              f'| Total (REAIS -> R$): {sales[order][CONST_FIELD_ORDER][0][CONST_FIELD_VALUE]:>20.2f} |')
         print('-' * 45)
     else:
         print('Nenhum pedido corresponde ao número informado... Tente novamente! ')
@@ -189,9 +191,9 @@ def main():
         elif choice == 5:
             specific_order_report(sales)
         elif choice == 6:
-            cli.main(clients)
+            cli.main(clients)       # Redirecionamento ao módulo de clientes
         elif choice == 7:
-            gui.main(guitars)
+            gui.main(guitars)       # Redirecionamento ao módulo de guitarras
         elif choice == 8:
             leave = util.yes_or_no_value('Certeza de que deseja sair do programa? [S/N]')
             if leave == 'S':
