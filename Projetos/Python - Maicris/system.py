@@ -57,7 +57,7 @@ def create_order(clients: dict, guitars: dict, sales: dict, identification: int)
         while True:
             serial = util.get_int_value('Número de série da guitarra que gostaria de comprar: ')
             if serial not in guitars:
-                 print('Guitarra não disponível, tente novamente mais tarde! ')
+                print('Guitarra não disponível, tente novamente mais tarde! ')
             else:
                 amount = util.get_int_value('Informe quantas unidades gostaria de comprar: ')
                 if guitars[serial][gui.CONST_FIELD_TOTAL] - amount > 0:
@@ -108,13 +108,13 @@ def order_summary(sales: dict):
     """
     order = util.get_int_value('Informe o número do pedido: ')
     if order in sales:
-        print('-' * 10, 'Resumo de pedidos', '-' * 10)
-        print(f'| Nome do comprador: {sales[order][CONST_FIELD_IDENTIFICATION][cli.CONST_FIELD_NAME]:>20}|')
-        print(f'| Modelo da guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_MODEL]:>20}|')
-        print(f'| Marca da guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_BRAND]:>20}|')
+        print('-' * 13, 'Resumo do Pedido', '-' * 13)
+        print(f'| Nome  do  comprador: {sales[order][CONST_FIELD_IDENTIFICATION][cli.CONST_FIELD_NAME]:>20}|')
+        print(f'| Modelo  da guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_MODEL]:>20}|')
+        print(f'| Marca  da  guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_BRAND]:>20}|')
         print(f'| Quantidade comprada: {sales[order][CONST_FIELD_ORDER][0][CONST_FIELD_QUANTITY]:>20}|')
-        print(f'| Total(R$): {sales[order][CONST_FIELD_ORDER][0][CONST_FIELD_VALUE]:>30.2f}|')
-        print('-' * 40)
+        print(f'| Total (REAIS -> R$): {sales[order][CONST_FIELD_ORDER][0][CONST_FIELD_VALUE]:>20.2f}|')
+        print('-' * 44)
     else:
         print('Nenhum pedido corresponde ao número informado... Tente novamente! ')
 
