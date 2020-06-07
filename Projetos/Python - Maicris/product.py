@@ -122,13 +122,17 @@ def search_guitar(guitars: dict):
     """
     serial = util.get_int_value('Informe o número de série da guitarra que deseja pesquisar: ')
     if serial in guitars:
-        print(f'Modelo da guitarra: {guitars[serial][CONST_FIELD_MODEL]} ')
-        print(f'Marca da guitarra: {guitars[serial][CONST_FIELD_BRAND]} ')
-        print(f'Ano de Fabricação da guitarra: {guitars[serial][CONST_FIELD_YEAR]} ')
-        print(f'País de Fabricação da guitarra: {guitars[serial][CONST_FIELD_COUNTRY]} ')
-        print(f'Custo da guitarra: R${guitars[serial][CONST_FIELD_COST]} ')
-        print(f'Descrição da guitarra: {guitars[serial][CONST_FIELD_DESCRIPTION]} ')
-        print(f'Quantidade no estoque: {guitars[serial][CONST_FIELD_TOTAL]} ')
+        print('-' * 58)
+        print('-' * 18, 'Guitarra Encontrada', '-' * 19)
+        print('-' * 58)
+        print(f'| Modelo da guitarra: {guitars[serial][CONST_FIELD_MODEL]:>34} |\n'
+              f'| Marca da guitarra: {guitars[serial][CONST_FIELD_BRAND]:>35} |\n'
+              f'| Ano de Fabricação da guitarra: {guitars[serial][CONST_FIELD_YEAR]:>23} |\n'
+              f'| País de Fabricação da guitarra: {guitars[serial][CONST_FIELD_COUNTRY]:>22} |\n'
+              f'| Custo da guitarra: R${guitars[serial][CONST_FIELD_COST]:>33} |\n'
+              f'| Descrição da guitarra: {guitars[serial][CONST_FIELD_DESCRIPTION]:>31} |\n'
+              f'| Quantidade no estoque: {guitars[serial][CONST_FIELD_TOTAL]:>31} |')
+        print('-' * 58)
     else:
         choice = util.yes_or_no_value('Guitarra não localizada. Deseja cadastrá-la? [S/N]')
         if choice == "S":
