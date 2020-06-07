@@ -104,6 +104,13 @@ def client_del(clients: dict):
             return True, 'Cliente deletado com sucesso! '
         else:
             return False, 'Cliente não foi deletado... '
+    else:
+        choice = util.yes_or_no_value('Cliente não localizado. Deseja cadastrá-lo? [S/N]')
+        if choice == 'S':
+            client_register(identification, clients)
+            return True, 'Cliente cadastrado com sucesso! '
+        else:
+            return False, 'Cliente não foi cadastrado... '
 
 
 def client_search(clients: dict):
@@ -134,12 +141,15 @@ def database_clear(clients: dict):
     :param clients: Remove clientes do banco de dados
     :return: None
     """
-    choice = util.yes_or_no_value('Certeza de que gostaria de deletar o banco de dados? [S/N]')
-    if choice == 'S':
-        clients.clear()
-        print('Banco de dados deletado com sucesso! ')
+    if len(clients) > 0:
+        choice = util.yes_or_no_value('Certeza de que gostaria de deletar o banco de dados? [S/N]')
+        if choice == 'S':
+            clients.clear()
+            print('Banco de dados deletado com sucesso! ')
+        else:
+            print('O banco de dados não foi deletado... ')
     else:
-        print('O banco de dados não foi deletado... ')
+        print('Não há como zerar o banco de dados, pois já está vazio! ')
 
 
 def list_clients(clients: dict):
