@@ -100,7 +100,7 @@ def client_del(clients: dict):
     if identification in clients:
         choice = util.yes_or_no_value('Deseja mesmo deletar o cliente? [S/N]')
         if choice == 'S':
-            del clients[identification]
+            clients.pop(identification)
             return True, 'Cliente deletado com sucesso! '
         else:
             return False, 'Cliente não foi deletado... '
@@ -164,17 +164,28 @@ def list_clients(clients: dict):
     :return: None
     """
     if len(clients) > 0:
-        for k, v in clients.items():
-            print(f'Identidade do cliente e seus dados -> {k} : {v}')
+        existent_clients(clients)
     else:
-        print('Antes de listar clientes, você precisa registra-los... ')
-        identification = util.get_int_value('Informe a identidade do cliente: ')
-        choice = util.yes_or_no_value('Deseja cadastrá-lo? [S/N]')
-        if choice == "S":
-            client_register(identification, clients)
-            print('Cliente cadastrado com sucesso! ')
-        else:
-            print('Você optou por não registrar nenhum cliente no momento. ')
+        print('Não existem clientes registrado! ')
+
+
+def existent_clients(clients: dict):
+    """
+    Exibe os clientes registrados
+
+    :param clients: Mostra os clientes cadastrados
+    :return: None
+    """
+    print('-' * 57)
+    print('=' * 17, 'Clientes Registrados', '=' * 18)
+    print('-' * 57)
+    for c in clients:
+        print(f'| Identidade do cliente: {c:>30} |\n'
+              f'| Nome  do  cliente: {clients[c][CONST_FIELD_NAME]:>34} | \n'
+              f'| Cidade do cliente: {clients[c][CONST_FIELD_CITY]:>34} | \n'
+              f'| Idade  do cliente: {clients[c][CONST_FIELD_AGE]:>34} |')
+        print('-' * 57)
+    print('')
 
 
 def main(clients: dict):
