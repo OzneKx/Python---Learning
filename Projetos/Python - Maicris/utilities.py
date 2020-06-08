@@ -78,15 +78,18 @@ def get_str_value(message: str):
     report = ''
     while True:
         word = input(message).title()
-        for c in word:
-            if c.isnumeric():
-                report = True
+        if len(word) != 0:
+            for c in word:
+                if c.isnumeric():
+                    report = True
+                else:
+                    report = False
+            if report:
+                print('Inválido! Insira apenas letras! ')
             else:
-                report = False
-        if report:
-            print('Inválido! Insira apenas letras! ')
+                return word
         else:
-            return word
+            print('Espaços vazios não são permitidos! Insira algo, por favor! ')
 
 
 def yes_or_no_value(message: str):
