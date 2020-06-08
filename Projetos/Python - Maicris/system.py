@@ -5,7 +5,6 @@ Numero do Pedido = {Identidade do Cliente: "Nome", "Cidade, "Idade",
                     Produto:
                         [{"Modelo", "Marca",
                          "Quantidade", "Valor Total"]}
-
 """
 
 
@@ -57,37 +56,39 @@ def create_order(clients: dict, guitars: dict, sales: dict, identification: int)
     :return: None
     """
     print('Estas são as guitarras disponíveis no estoque: ')
-    for k, v in guitars.items():
-        print(f'N° série: {k} = {v}')
-    order = util.get_int_value('Número do pedido: ')
-    if order not in sales:
-        while True:
-            serial = util.get_int_value('Número de série da guitarra que gostaria de comprar: ')
-            if serial not in guitars:
-                print('Guitarra não disponível, tente novamente mais tarde! ')
-            else:
-                amount = util.get_int_value('Informe quantas unidades gostaria de comprar: ')
-                if guitars[serial][gui.CONST_FIELD_TOTAL] - amount > 0:
-                    guitars[serial][gui.CONST_FIELD_TOTAL] -= amount
-                    cost = guitars[serial][gui.CONST_FIELD_COST] * amount
-                    sales[order] = {CONST_FIELD_IDENTIFICATION: clients[identification],
-                                    CONST_FIELD_ORDER:
-                                        [{gui.CONST_FIELD_MODEL: guitars[serial][gui.CONST_FIELD_MODEL],
-                                            gui.CONST_FIELD_BRAND: guitars[serial][gui.CONST_FIELD_BRAND],
-                                            CONST_FIELD_QUANTITY: amount,
-                                            CONST_FIELD_VALUE: cost}]}
-                    print('Pedido efetuado! ')
-                    more = util.yes_or_no_value('Gostaria de comprar mais uma guitarras? [S/N]')
-                    if more == 'N':
-                        print('Agradeço por ter comprado o produto! Volte sempre! ')
-                        break
-                    else:
-                        continue
+    if len(guitars) > 0:
+        gui.list_guitar(guitars)
+        order = util.get_int_value('Número do pedido: ')
+        if order not in sales:
+            while True:
+                serial = util.get_int_value('Número de série da guitarra que gostaria de comprar: ')
+                if serial not in guitars:
+                    print('Guitarra não disponível, tente novamente mais tarde! ')
                 else:
-                    print(f'O estoque contém apenas {guitars[serial][gui.CONST_FIELD_TOTAL]} produtos.\n'
-                          f'Portanto, ele não pode se esgotar :) ')
+                    amount = util.get_int_value('Informe quantas unidades gostaria de comprar: ')
+                    if guitars[serial][gui.CONST_FIELD_TOTAL] - amount > 0:
+                        guitars[serial][gui.CONST_FIELD_TOTAL] -= amount
+                        cost = guitars[serial][gui.CONST_FIELD_COST] * amount
+                        sales[order] = {CONST_FIELD_IDENTIFICATION: clients[identification],
+                                        CONST_FIELD_ORDER:
+                                            [{gui.CONST_FIELD_MODEL: guitars[serial][gui.CONST_FIELD_MODEL],
+                                                gui.CONST_FIELD_BRAND: guitars[serial][gui.CONST_FIELD_BRAND],
+                                                CONST_FIELD_QUANTITY: amount,
+                                                CONST_FIELD_VALUE: cost}]}
+                        print('Pedido efetuado! ')
+                        more = util.yes_or_no_value('Gostaria de comprar mais uma guitarras? [S/N]')
+                        if more == 'N':
+                            print('Agradeço por ter comprado o produto! Volte sempre! ')
+                            break
+                        else:
+                            continue
+                    else:
+                        print(f'O estoque contém apenas {guitars[serial][gui.CONST_FIELD_TOTAL]} produtos.\n'
+                              f'Portanto, ele não há como ser menor do que 0 :) ')
+        else:
+            print('Número de pedido já existente! Insira outro, por gentileza. ')
     else:
-        print('Número de pedido já existente! Insira outro, por gentileza. ')
+        gui.list_guitar(guitars)
 
 
 def cancel_order(sales: dict):
@@ -116,7 +117,7 @@ def order_summary(sales: dict):
     order = util.get_int_value('Informe o número do pedido: ')
     if order in sales:
         print('-' * 45)
-        print('-' * 14, 'Resumo do Pedido', '-' * 13)
+        print('=' * 14, 'Resumo do Pedido', '=' * 13)
         print('-' * 45)
         print(f'| Nome  do  comprador: {sales[order][CONST_FIELD_IDENTIFICATION][cli.CONST_FIELD_NAME]:>20} |\n'
               f'| Modelo  da guitarra: {sales[order][CONST_FIELD_ORDER][0][gui.CONST_FIELD_MODEL]:>20} |\n'
@@ -136,8 +137,16 @@ def general_order_report(sales: dict):
     :return: None
     """
     if len(sales) > 0:
-        for k, v in sales.items():
-            print(f'N° pedido: {k} : {v}')
+        for c in sales:
+            print('-' * 45)
+            print('=' * 14,  f" Pedido N° {c} ", '=' * 14)
+            print('-' * 45)
+            print(f'| Nome  do  comprador: {sales[c][CONST_FIELD_IDENTIFICATION][cli.CONST_FIELD_NAME]:>20} |\n'
+                  f'| Modelo  da guitarra: {sales[c][CONST_FIELD_ORDER][0][gui.CONST_FIELD_MODEL]:>20} |\n'
+                  f'| Marca  da  guitarra: {sales[c][CONST_FIELD_ORDER][0][gui.CONST_FIELD_BRAND]:>20} |\n'
+                  f'| Quantidade comprada: {sales[c][CONST_FIELD_ORDER][0][CONST_FIELD_QUANTITY]:>20} |\n'
+                  f'| Total (REAIS -> R$): {sales[c][CONST_FIELD_ORDER][0][CONST_FIELD_VALUE]:>20.2f} |')
+            print('-' * 45)
     else:
         print('Nenhuma venda foi feita até então')
 
@@ -150,11 +159,7 @@ def specific_order_report(sales: dict):
     :return: None
     """
     if len(sales) > 0:
-        order = util.get_int_value('Número do pedido que gostaria de buscar: ')
-        if order not in sales:
-            print('Número de pedido não encontrado! ')
-        else:
-            print(sales[order])
+        order_summary(sales)
     else:
         print('Nenhuma venda foi feita até então')
 
