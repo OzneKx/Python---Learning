@@ -122,17 +122,18 @@ def search_guitar(guitars: dict):
     """
     serial = util.get_int_value('Informe o número de série da guitarra que deseja pesquisar: ')
     if serial in guitars:
-        print('-' * 58)
-        print('-' * 18, 'Guitarra Encontrada', '-' * 19)
-        print('-' * 58)
-        print(f'| Modelo da guitarra: {guitars[serial][CONST_FIELD_MODEL]:>34} |\n'
-              f'| Marca da guitarra: {guitars[serial][CONST_FIELD_BRAND]:>35} |\n'
-              f'| Ano de Fabricação da guitarra: {guitars[serial][CONST_FIELD_YEAR]:>23} |\n'
-              f'| País de Fabricação da guitarra: {guitars[serial][CONST_FIELD_COUNTRY]:>22} |\n'
-              f'| Custo da guitarra: R${guitars[serial][CONST_FIELD_COST]:>33} |\n'
-              f'| Descrição da guitarra: {guitars[serial][CONST_FIELD_DESCRIPTION]:>31} |\n'
-              f'| Quantidade no estoque: {guitars[serial][CONST_FIELD_TOTAL]:>31} |')
-        print('-' * 58)
+        print('-' * 57)
+        print('=' * 17, 'Guitarra Encontrada', '=' * 18)
+        print('-' * 57)
+        print(f'| N° de série da guitarra: {serial:>28} |\n'
+              f'| {CONST_FIELD_MODEL}: {guitars[serial][CONST_FIELD_MODEL]:>45} |\n'
+              f'| {CONST_FIELD_BRAND}: {guitars[serial][CONST_FIELD_BRAND]:>46} |\n'
+              f'| {CONST_FIELD_YEAR}: {guitars[serial][CONST_FIELD_YEAR]:>34} |\n'
+              f'| {CONST_FIELD_COUNTRY}: {guitars[serial][CONST_FIELD_COUNTRY]:>31} |\n'
+              f'| {CONST_FIELD_COST}: {guitars[serial][CONST_FIELD_COST]:>46} |\n'
+              f'| {CONST_FIELD_DESCRIPTION}: {guitars[serial][CONST_FIELD_DESCRIPTION]:>42} |\n'
+              f'| {CONST_FIELD_TOTAL}: {guitars[serial][CONST_FIELD_TOTAL]:>35} |')
+        print('-' * 57)
     else:
         choice = util.yes_or_no_value('Guitarra não localizada. Deseja cadastrá-la? [S/N]')
         if choice == "S":
@@ -150,17 +151,9 @@ def list_guitar(guitars: dict):
     :return: None
     """
     if len(guitars) > 0:
-        for k, v in guitars.items():
-            print(f'Número de série da guitarra e suas características -> {k} : {v}')
+        available_guitars(guitars)
     else:
-        print('Antes de listar produtos, você precisa registra-los... ')
-        serial = util.get_int_value('Informe o número de série da guitarra: ')
-        choice = util.yes_or_no_value('Deseja cadastrá-la? [S/N]')
-        if choice == "S":
-            guitar_register(serial, guitars)
-            print('Guitarra cadastrada com sucesso! ')
-        else:
-            print('Você optou por não registrar nenhum produto no momento. ')
+        print('Não há guitarras disponíveis no estoque para listá-las. ')
 
 
 def stockpile_modify(guitars: dict):
@@ -197,6 +190,29 @@ def stockpile_modify(guitars: dict):
             print('Guitarra adicionada ao estoque com sucesso! ')
         else:
             print('Nenhuma guitarra foi reposta no estoque... ')
+
+
+def available_guitars(guitars: dict):
+    """
+    Exibe as guitarras disponiveis no estoque
+
+    :param guitars: Mostra as guitarras no estoque
+    :return: None
+    """
+    print('-' * 57)
+    print('=' * 17, 'Produtos Disponíveis', '=' * 18)
+    print('-' * 57)
+    for c in guitars:
+        print(f'| N° de série da guitarra: {c:>28} |\n'
+              f'| {CONST_FIELD_MODEL}: {guitars[c][CONST_FIELD_MODEL]:>45} |\n'
+              f'| {CONST_FIELD_BRAND}: {guitars[c][CONST_FIELD_BRAND]:>46} |\n'
+              f'| {CONST_FIELD_YEAR}: {guitars[c][CONST_FIELD_YEAR]:>34} |\n'
+              f'| {CONST_FIELD_COUNTRY}: {guitars[c][CONST_FIELD_COUNTRY]:>31} |\n'
+              f'| {CONST_FIELD_COST}: {guitars[c][CONST_FIELD_COST]:>46} |\n'
+              f'| {CONST_FIELD_DESCRIPTION}: {guitars[c][CONST_FIELD_DESCRIPTION]:>42} |\n'
+              f'| {CONST_FIELD_TOTAL}: {guitars[c][CONST_FIELD_TOTAL]:>35} |')
+        print('-' * 57)
+    print('')
 
 
 def main(guitars: dict):
