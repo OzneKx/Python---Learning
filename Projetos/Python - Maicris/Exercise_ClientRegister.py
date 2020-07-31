@@ -1,157 +1,227 @@
 """
-Exemplo de uso de funções para cadastro
-Uso de Dicionários como banco de dados
-Estrutura:
-
-#Dados de cadastro do cliente
-clients {
-    id : {
-        name: nome do usuário,
-        city: cidade do usuário ,
-        age:  idade do usuário
-    }
-}
+Client Registration
 """
 
 
-#Definindo uma função para o uso do sleep
-def sleep():
-    from time import sleep                              #Importando sleep do time
-    sleep(1.5)
+# Importa modulos de utilidades
+import utilities as util
 
 
-#Keys do dicionário
 CONST_FIELD_NAME = "name"
 CONST_FIELD_CITY = "city"
 CONST_FIELD_AGE = "age"
 
 
-#Exibe o menu de opções
-def menu():
-    print('Processando...')
-    sleep()
-    print('\033[31m=-=\033[m' * 10)
-    print(f'\033[33m{"CADASTRAR CLIENTES":^30}\033[m')
-    print('\033[31m=-=\033[m' * 10)
-    print('---------SUAS OPÇÕES----------')                             #Exibição do menu
-    print('\033[34m[1] Cadastrar Cliente\n'
+def menu_clients():
+    """
+    Exibe menu de opções
+
+    :return: Opção escolhida pelo usuário
+    """
+    print('=' * 30)
+    print(f'{"Cadastro de Clientes":^30}')
+    print('-' * 8, "Suas Opções", '-' * 8)
+    print('[1] Cadastrar Cliente\n'
           '[2] Alterar dados de cliente\n'
           '[3] Excluir cliente\n'
           '[4] Pesquisar Cliente\n'
           '[5] Zerar Banco de Dados\n'
-          '[6] SAIR\033[m')
-    print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n")
-    return get_int_value_with_range("Digite uma das opções: ", 1, 6)     #Solicitar ao usuário digitar corretamente as opções disponíveis
+          '[6] Listar Clientes\n'
+          '[7] SAIR')
+    print('=' * 30)
+    return util.get_int_value_with_range('Digite uma das opções: ', 1, 7)
 
 
-#Validando dados inteiros em um determinado range
-def get_int_value_with_range(message, min_value, max_value):
-    while True:
-        try:
-            escolha = int(input(f'{message}: '))
-        except ValueError:
-            print("\033[31mFormato inválido: esperado um número\033[m")     #Mensagem de formato inválido quando uma letra for inserida no lugar de um número
-            continue
-        if not min_value <= escolha <= max_value:
-            print(f'\033[31mOpção inválida: escolha um número de {min_value} a {max_value}\033[m')  #Mensagem de formato inválido quando um número fora das opções forem inseridos
+def client_register(identification: int, clients: dict):
+    """
+    Registrar clientes com seus dados
+
+    :param identification: Registro da identificação do cliente no dicionário
+    :param clients: Dados do cliente para cadastrá-la no dicinário
+    :return: None
+    """
+    name = util.get_str_value('Informe o nome do cliente: ')
+    city = util.get_str_value('Informe a cidade do cliente: ')
+    age = util.get_int_value_with_range('Digite a idade do cliente: ', 18, 120)
+    clients[identification] = {
+        CONST_FIELD_NAME: name,
+        CONST_FIELD_CITY: city,
+        CONST_FIELD_AGE: age
+    }
+
+
+def client_add(clients: dict):
+    """
+    Registrar clientes com seus dados
+
+    :param clients: Dados do cliente para cadastrá-la
+    :return: Se o cliente já está registrado ou não
+    """
+    identification = util.get_int_value('Informe a identidade do cliente: ')
+    if identification in clients:
+        choice = util.yes_or_no_value('Cliente já cadastrado! Deseja alterar seus dados? [S/N]')
+        if choice == 'S':
+            client_register(identification, clients)
+            return True, 'Dados do cliente alterados com sucesso! '
         else:
-            return escolha
-
-
-#Cadastro de clientes
-def client_register(clients):                           #Solicitar ao usuário dados básicos para o cadastro
-    id = input('Informe a identidade do cliente: ')
-    name = input('Informe o nome do cliente: ')
-    city = input('Informe a cidade do cliente: ')
-    age = get_int_value_with_range("Digite a idade do cliente\033", 18, 120)
-    if id in clients:
-        return False
+            return False, 'Nenhum dado foi alterado ... '
     else:
-        clients[id] = {
-            CONST_FIELD_NAME: name,
-            CONST_FIELD_CITY: city,
-            CONST_FIELD_AGE: age
-        }
-        print('\033[33mCliente cadastrado com sucesso! \033[m')                 #Mensagem de sucesso em cadastrar o cliente
-        return True
+        client_register(identification, clients)
+        return True, 'Cliente cadastrado com sucesso! '
 
 
-#Edita os dados de clientes
-def client_edit(clients):
-    editar = input('Informe a identidade do cliente a ser editado: ')           #Solicitar a identidade do cliente para que seja possível editá-lo
-    if editar in clients:
-        new_data = input('Deseja mesmo alterar? [S/N]: ').upper()               #Confirmar se o usuário deseja realizar ou não uma alteração do cliente
-        if new_data == 'S':
-            clients.pop(editar)
-            client_register(clients)
-            print('\033[33mDados do cliente alterados com sucesso! \033[m')     #Mensagem de sucesso ao alterar os dados do cliente
-            sleep()
-        elif new_data == 'N':
-            print('\033[31mNão houveram aterações de dados do cliente...\033[m ')  #Mensagem de erro em alterar os dados o cliente
-            sleep()
+def client_edit(clients: dict):
+    """
+    Altera dados dos registros do cliente
 
-
-#Remove clientes
-def client_del(clients):
-    remover = input('Informe a identidade do cliente que deseja remover: ')      #Remoção do cliente através do CPF
-    if remover == clients:
-        clients.pop(remover)
-        print('\033[33mCliente removido com sucesso! \033[m')                    #Mensagem de sucesso em remover o cliente
-        sleep()
+    :param clients: Exibe os dados dos registros do cliente
+    :return: Se o cliente sofreu alterações nos dados ou não
+    """
+    identification = util.get_int_value('Informe a identidade do cliente a ser editado: ')
+    if identification in clients:
+        client_register(identification, clients)
+        return True, 'Cliente alterado com sucesso! '
     else:
-        print('\033[31mCliente não encontrado. Não foi possível removê-lo... \033[m')   #Mensagem de erro em encontrar o cliente
-        sleep()
+        choice = util.yes_or_no_value('Cliente não localizado. Deseja cadastrá-lo? [S/N]')
+        if choice == 'S':
+            client_register(identification, clients)
+            return True, 'Cliente cadastrado com sucesso! '
+        else:
+            return False, 'Cliente não foi cadastrado... '
 
 
-#Pesquisa clientes
-def client_query(clients):
-    buscar = input('Informe a identidade do cliente que deseja pesquisar: ')     #Pesquisa do cliente através de sua identidade
-    if buscar in clients:
-        clients[buscar]
-        print('Cliente encontrado: ')                                            #Mensagem de sucesso em encontrar o cliente
-        print(clients[buscar])
-        sleep()
+def client_del(clients: dict):
+    """
+    Remoção de clientes específicos do banco de dados através de sua identificação
+
+    :param clients: Identifica clientes no banco de dados a serem removidos através de sua identificação
+    :return: None
+    """
+    identification = util.get_int_value('Informe a identidade do cliente que deseja remover: ')
+    if identification in clients:
+        choice = util.yes_or_no_value('Deseja mesmo deletar o cliente? [S/N]')
+        if choice == 'S':
+            clients.pop(identification)
+            return True, 'Cliente deletado com sucesso! '
+        else:
+            return False, 'Cliente não foi deletado... '
     else:
-        print('\033[31mNão foi possível encontrar o cliente... \033[m')          #Mensagem de erro em encontrar o cliente
-        sleep()
+        choice = util.yes_or_no_value('Cliente não localizado. Deseja cadastrá-lo? [S/N]')
+        if choice == 'S':
+            client_register(identification, clients)
+            return True, 'Cliente cadastrado com sucesso! '
+        else:
+            return False, 'Cliente não foi cadastrado... '
 
 
-#Exclui o banco de dados
-def database_clear(clients):
-    really = input('Certeza de que gostaria de deletar o banco de dados\n'       #Confirmar se deseja mesmo deletar o banco de dados
-                       '[S] SIM\n'
-                       '[N] NÃO\n'
-                       'Escolha: ').upper()
-    if really == 'S':
-        clients.clear()
-        print('\033[33mBanco de dados deletado com sucesso! \033[m')            #Mensagem de sucesso em limpar o banco de dados
-        sleep()
-    elif really == 'N':
-        print('\033[31mO banco de dados não foi deletado...\033[m ')            #Mensagem de erro em limpar o banco de dados
-        sleep()
+def client_search(clients: dict):
+    """
+    Pesquisa clientes no banco de dados atraves de suas identidades
+
+    :param clients: Possibilita a pesquisa de clientes registradas
+    :return: Se o cliente foi encontrado ou não
+    """
+    identification = util.get_int_value('Informe a identidade do cliente que deseja pesquisar: ')
+    if identification in clients:
+        print('-' * 33)
+        print('-' * 6, 'Cliente Encontrado', '-' * 7)
+        print('-' * 33)
+        print(f'| Nome  do  cliente: {clients[identification][CONST_FIELD_NAME]:>10} | \n'
+              f'| Cidade do cliente: {clients[identification][CONST_FIELD_CITY]:>10} | \n'
+              f'| Idade  do cliente: {clients[identification][CONST_FIELD_AGE]:>10} |')
+        print('-' * 33)
+    else:
+        choice = util.yes_or_no_value('Cliente não localizado. Deseja cadastra-lo? [S/N]')
+        if choice == "S":
+            client_register(identification, clients)
+            print('Cliente cadastrado com sucesso! ')
+        else:
+            print('Cliente não localizado nos cadastros... ')
 
 
-#Ponto de entrada do módulo
-def main():
-    clients = {}                                                                #Banco de dados no formato dicionário
+def database_clear(clients: dict):
+    """
+    Remove clientes do banco de dados
+
+    :param clients: Remove clientes do banco de dados
+    :return: None
+    """
+    if len(clients) > 0:
+        choice = util.yes_or_no_value('Certeza de que gostaria de deletar o banco de dados? [S/N]')
+        if choice == 'S':
+            clients.clear()
+            print('Banco de dados deletado com sucesso! ')
+        else:
+            print('O banco de dados não foi deletado... ')
+    else:
+        print('Não há como zerar o banco de dados, pois já está vazio! ')
+
+
+def list_clients(clients: dict):
+    """
+    Lista os clientes registrados
+
+    :param clients: Exibe os clientes registrados no dicionário
+    :return: None
+    """
+    if len(clients) > 0:
+        existent_clients(clients)
+    else:
+        print('Não existem clientes registrado! ')
+
+
+def existent_clients(clients: dict):
+    """
+    Exibe os clientes registrados
+
+    :param clients: Mostra os clientes cadastrados
+    :return: None
+    """
+    print('-' * 57)
+    print('=' * 17, 'Clientes Registrados', '=' * 18)
+    print('-' * 57)
+    for c in clients:
+        print(f'| Identidade do cliente: {c:>30} |\n'
+              f'| Nome  do  cliente: {clients[c][CONST_FIELD_NAME]:>34} | \n'
+              f'| Cidade do cliente: {clients[c][CONST_FIELD_CITY]:>34} | \n'
+              f'| Idade  do cliente: {clients[c][CONST_FIELD_AGE]:>34} |')
+        print('-' * 57)
+    print('')
+
+
+def main(clients: dict):
+    """
+    Ponto principal do programa
+
+    :return: None
+    """
     while True:
-        escolha = menu()
-        if escolha == 1:
-            client_register(clients)                                            #Chamar a função
-        elif escolha == 2:
-            client_edit(clients)                                                #Chamar a função
-        elif escolha == 3:
-            client_del(clients)                                                 #Chamar a função
-        elif escolha == 4:
-            client_query(clients)                                               #Chamar a função
-        elif escolha == 5:
-            database_clear(clients)                                             #Chamar a função
-        elif escolha == 6:
-            sleep() 
-            print('\033[33mVolte sempre! \033[m ')                              #Saída do programa com mensagem de agradecimento ao usuário
-            break
+        choice = menu_clients()
+        if choice == 1:
+            res, resp = client_add(clients)
+            print(resp)
+        elif choice == 2:
+            res, resp = client_edit(clients)
+            print(resp)
+        elif choice == 3:
+            res, resp = client_del(clients)
+            print(resp)
+        elif choice == 4:
+            client_search(clients)
+        elif choice == 5:
+            database_clear(clients)
+        elif choice == 6:
+            list_clients(clients)
+        elif choice == 7:
+            leave = util.yes_or_no_value('Certeza de que deseja sair do programa? [S/N]')
+            if leave == 'S':
+                print('Volte sempre! ')
+                util.save_in_file_dict("cliente", clients)  # Salvar um dicionário em um arquivo binário
+                break
+            else:
+                print('Você optou por não sair do programa! ')
 
 
-#Modularização
 if __name__ == '__main__':
-    main()
+    var = util.file_read_bin("cliente")     # Leitura do arquivo, porém, caso não exista, será criado um
+    main(var)
